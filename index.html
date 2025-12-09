@@ -18,8 +18,15 @@
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       
       /* Layout Dimensions */
-      --max-width: 1148px;
-      --sidebar-width: 220px; /* Internal spacing for the left column */
+      
+      /* 
+         CALCULATED WIDTH FOR PERFECT CENTERING:
+         Sidebar (220px) + Text Content (580px) = 800px.
+         This ensures Left Margin = Right Margin visually.
+      */
+      --container-width: 800px; 
+      
+      --sidebar-width: 220px; 
       --top-spacing: 120px;
       --bottom-spacing: 140px;
     }
@@ -50,22 +57,21 @@
       ---------------------------------------
     */
     .container {
-      /* 1. Limits width to 1148px */
-      max-width: var(--max-width);
+      max-width: var(--container-width);
       width: 100%;
       
-      /* 2. CENTERS the container horizontally on the screen */
+      /* Centers the container horizontally */
       margin: 0 auto; 
       
       padding-top: var(--top-spacing);
       padding-bottom: var(--bottom-spacing);
       
-      /* 3. Adds safety padding so it doesn't touch edges on smaller screens */
+      /* Safety padding for small screens */
       padding-left: 20px;
       padding-right: 20px;
       
       display: grid;
-      /* Left column is exactly 220px wide | Right Column takes the rest */
+      /* Left column (220px) | Right Column (Auto/Fill) */
       grid-template-columns: var(--sidebar-width) 1fr; 
     }
 
@@ -93,7 +99,8 @@
 
     p {
       margin-bottom: 24px;
-      max-width: 580px; /* Limits line length for readability */
+      /* This matches the remaining width (800 - 220 = 580) */
+      max-width: 580px; 
     }
 
     a {
@@ -231,7 +238,7 @@
 
 <div class="container animated fadeIn one">
   
-  <!-- LEFT COLUMN: Exactly 220px wide inside the centered container -->
+  <!-- LEFT COLUMN: Sidebar (220px) -->
   <div class="icon-col">
     <div id="theme-btn" class="theme-toggle">
         
