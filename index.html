@@ -131,29 +131,34 @@
       transition: opacity 0.2s;
     }
 
-    /* Strict sizing for SVGs */
     .theme-toggle svg {
       width: 24px;
       height: 24px;
-      display: block;
     }
 
     /* 
-       Mode Logic:
-       .icon-moon is shown in Day Mode (Crescent Moon)
-       .icon-sun is shown in Night Mode (Sun with rays)
+      STRICT VISIBILITY LOGIC 
+      This ensures the circle (sun) is NEVER visible in Day mode
     */
-    
-    .icon-sun { display: none; }
-    .icon-moon { display: block; fill: #333; }
 
-    /* When body has class 'night' */
-    body.night .icon-sun { 
-      display: block; 
-      fill: #fff; 
-      stroke: #fff; 
+    /* Default (Day Mode) */
+    body.day .icon-moon {
+      display: block !important;
+      fill: #333;
     }
-    body.night .icon-moon { display: none; }
+    body.day .icon-sun {
+      display: none !important; /* Forces the sun (and its circle) to vanish */
+    }
+
+    /* Night Mode */
+    body.night .icon-moon {
+      display: none !important;
+    }
+    body.night .icon-sun {
+      display: block !important;
+      fill: #fff;
+      stroke: #fff;
+    }
 
     /* 
       5. JOB LIST GRID 
@@ -223,13 +228,15 @@
   <div class="icon-col">
     <div id="theme-btn" class="theme-toggle">
         
-        <!-- Day Mode Icon: CRESCENT MOON (No circle/dot next to it) -->
-        <svg class="icon-moon" viewBox="0 0 24 24" width="24" height="24">
+        <!-- DAY ICON: CRESCENT MOON ONLY -->
+        <svg class="icon-moon" viewBox="0 0 24 24">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
 
-        <!-- Night Mode Icon: SUN WITH RAYS -->
-        <svg class="icon-sun" viewBox="0 0 24 24" width="24" height="24">
+        <!-- NIGHT ICON: SUN (Hidden in Day Mode via CSS) -->
+        <svg class="icon-sun" viewBox="0 0 24 24">
+             <!-- This circle is ONLY visible when body class is 'night' -->
+            <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
             <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
