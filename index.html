@@ -15,7 +15,7 @@
       --text-color: #111;
       --secondary-text: #777;
       --link-color: #111;
-      --divider-color: #e5e5e5; /* For Mobile Divider */
+      --divider-color: #e5e5e5;
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       
       /* Tooltip Colors */
@@ -71,6 +71,16 @@
       grid-template-columns: var(--sidebar-width) 1fr; 
     }
 
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+      }
+      .icon-col {
+        margin-bottom: 40px;
+      }
+    }
+
     /* 
       3. TYPOGRAPHY & ELEMENTS 
       ---------------------------------------
@@ -112,6 +122,13 @@
     
     h4.label.mt-large { margin-top: 60px; }
 
+    /* Footer text style */
+    .footer-text {
+      font-size: 14px;
+      color: var(--secondary-text);
+      margin-top: 60px;
+    }
+
     /* 
       4. ICON (Day/Night Toggle) 
       ---------------------------------------
@@ -145,7 +162,6 @@
       flex-direction: column;
     }
 
-    /* The Floating Tooltip (Desktop Only) */
     .hover-tooltip {
       position: absolute;
       left: -240px; 
@@ -207,6 +223,16 @@
       font-weight: 400;
       margin: 4px 0 0 0;
     }
+
+    /* 
+       SPACING FIX: 
+       This class mimics the padding-top of .job-row so 
+       "OTHER THAN DESIGN" text starts at the exact same vertical 
+       distance from the label as "Mobius Labs" does.
+    */
+    .text-content-padding {
+        padding-top: 24px;
+    }
     
     #rdio-psa {
       font-size: 12px;
@@ -227,36 +253,29 @@
         margin-bottom: 40px;
       }
 
-      /* Hide the floating tooltip on mobile */
       .hover-tooltip { display: none !important; }
 
       .job-row {
-        /* On mobile, allow the grid to stack if needed, or keep side-by-side */
-        /* Here we keep side-by-side but reduce gap */
         column-gap: 20px; 
         margin-bottom: 0;
         padding-bottom: 24px;
       }
 
-      /* 
-         MOBILE TOOLTIP LOGIC:
-         Display the data-tooltip text below the row with a divider 
-      */
       .job-row::after {
-        content: attr(data-tooltip); /* Grab text from HTML */
-        grid-column: 1 / -1; /* Span entire width */
-        
+        content: attr(data-tooltip);
+        grid-column: 1 / -1; 
         display: block;
         margin-top: 16px;
         padding-top: 16px;
-        
-        /* The Divider */
         border-top: 1px solid var(--divider-color);
-        
-        /* Text Styling */
         font-size: 14px;
         color: var(--secondary-text);
         line-height: 1.5;
+      }
+      
+      /* Reset padding on mobile if needed, or keep it consistent */
+      .text-content-padding {
+          padding-top: 0;
       }
     }
 
@@ -386,7 +405,8 @@
     <!-- NEW SECTION -->
     <h4 class="label mt-large animated fadeIn four">OTHER THAN DESIGN</h4>
 
-    <div class="animated fadeIn four">
+    <!-- Added 'text-content-padding' to match spacing of job rows -->
+    <div class="animated fadeIn four text-content-padding">
         <p>
             I learned Swift in just 6 months and, in 2025, collaborated with 
             <a href="https://hydrocoach.com/" target="_blank">HydroCoach</a> 
@@ -399,7 +419,8 @@
         </p>
     </div>
 
-        <div class="animated fadeIn four">
+    <!-- FOOTER -->
+    <div class="animated fadeIn four footer-text">
         <p>
             This website is vibe-coded with Gemini 3 Pro. © 2026 All rights reserved.
         </p>
@@ -438,11 +459,9 @@
   const tooltip = document.getElementById('hover-tooltip');
   
   function updateTooltip(element) {
-      // 1. Update Tooltip Text
       const text = element.getAttribute('data-tooltip');
       tooltip.innerText = text;
       
-      // 2. Move Tooltip (Center vertically relative to the row)
       const centerLine = element.offsetTop + (element.offsetHeight / 2);
       tooltip.style.top = centerLine + "px";
       tooltip.style.opacity = "1";
@@ -455,7 +474,6 @@
       }, 100);
   }
 
-  // Add event listeners
   jobRows.forEach(row => {
       row.addEventListener('mouseenter', function() {
           if (window.innerWidth > 768) {
