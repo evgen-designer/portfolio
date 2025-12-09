@@ -19,7 +19,7 @@
       
       /* Layout Dimensions */
       --max-width: 1148px;
-      --sidebar-width: 220px; /* EXACT 220px SPACE */
+      --sidebar-width: 220px; /* Internal spacing for the left column */
       --top-spacing: 120px;
       --bottom-spacing: 140px;
     }
@@ -50,25 +50,30 @@
       ---------------------------------------
     */
     .container {
+      /* 1. Limits width to 1148px */
       max-width: var(--max-width);
-      margin: 0 auto;
+      width: 100%;
+      
+      /* 2. CENTERS the container horizontally on the screen */
+      margin: 0 auto; 
+      
       padding-top: var(--top-spacing);
       padding-bottom: var(--bottom-spacing);
       
-      /* Removed padding-left/right so the grid is exactly 220px from the edge */
-      display: grid;
+      /* 3. Adds safety padding so it doesn't touch edges on smaller screens */
+      padding-left: 20px;
+      padding-right: 20px;
       
-      /* Left column (Icon/Space) = 220px | Right Column (Content) = Rest */
+      display: grid;
+      /* Left column is exactly 220px wide | Right Column takes the rest */
       grid-template-columns: var(--sidebar-width) 1fr; 
     }
 
-    /* Mobile Responsive: Stack columns & add padding back for small screens */
+    /* Mobile Responsive: Stack columns */
     @media (max-width: 768px) {
       .container {
         grid-template-columns: 1fr;
         padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
       }
       .icon-col {
         margin-bottom: 40px;
@@ -121,7 +126,6 @@
     */
     .icon-col {
       padding-top: 10px; /* Align visually with H1 */
-      /* Defines the content inside the 220px sidebar */
     }
 
     .theme-toggle {
@@ -227,7 +231,7 @@
 
 <div class="container animated fadeIn one">
   
-  <!-- LEFT COLUMN (Sidebar): Exactly 220px wide -->
+  <!-- LEFT COLUMN: Exactly 220px wide inside the centered container -->
   <div class="icon-col">
     <div id="theme-btn" class="theme-toggle">
         
