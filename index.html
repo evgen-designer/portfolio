@@ -98,9 +98,13 @@
       border-bottom: 1px solid var(--link-color);
     }
 
-    /* CHANGED: Reduced spacer height significantly */
+    /* Spacer height */
     .spacer48 {
       height: 16px; 
+    }
+    
+    .spacer-section {
+      height: 48px;
     }
 
     h4.label {
@@ -110,9 +114,13 @@
       color: var(--secondary-text);
       font-weight: 400; 
       
-      /* CHANGED: Reduced margin-top to bring it closer to text above */
       margin-top: 24px; 
       margin-bottom: 40px;
+    }
+    
+    /* Specific margin for the bottom section to separate it from job list */
+    h4.label.mt-large {
+        margin-top: 60px;
     }
 
     /* 
@@ -166,7 +174,7 @@
       margin-bottom: 40px;
       max-width: 580px;
       
-      /* CHANGED: Added large gap to separate columns and force wrapping */
+      /* Gap to separate columns */
       column-gap: 80px; 
     }
     
@@ -174,7 +182,7 @@
       font-size: 16px;
       font-weight: 700;
       margin: 0;
-      line-height: 1.4; /* Improves readability when text wraps */
+      line-height: 1.4; 
     }
     
     .job-details h3 {
@@ -210,6 +218,7 @@
     .one { animation-delay: 0.1s; }
     .two { animation-delay: 0.5s; }
     .three { animation-delay: 0.9s; }
+    .four { animation-delay: 1.1s; } /* New delay for bottom section */
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -317,6 +326,22 @@
         <h4>2017-2021</h4>
       </div>
     </div> 
+
+    <!-- NEW SECTION -->
+    <h4 class="label mt-large animated fadeIn four">OTHER THAN DESIGN</h4>
+
+    <div class="animated fadeIn four">
+        <p>
+            I learned Swift in just 6 months and, in 2025, collaborated with 
+            <a href="https://hydrocoach.com/" target="_blank">HydroCoach</a> 
+            (2.6M users; WatchOS) and launched both 
+            <a href="https://www.keepiko.com/" target="_blank">Keepiko</a> 
+            iOS app and 
+            <a href="https://jolitree.com/" target="_blank">JoliTree</a> 
+            macOS app. All 3 products went through full production cycle, generated $1-2K MMR and got 10K+ new users. You can check the journey on 
+            <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a>.
+        </p>
+    </div>
 
   </div> <!-- End Content Col -->
 </div> <!-- End Container -->
