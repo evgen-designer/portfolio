@@ -27,6 +27,7 @@
   <meta property="og:image" content="https://evgendesigner.com/images/social-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://evgendesigner.com/">
 
   <!-- 5. TWITTER CARDS -->
   <meta name="twitter:card" content="summary_large_image">
@@ -334,49 +335,6 @@
     }
 
     /* 
-      COOKIE BANNER STYLES 
-      ---------------------------------------
-    */
-    .cookie-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: var(--text-color); /* Inverted colors */
-      color: var(--bg-color);
-      padding: 16px 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      z-index: 9999;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-      font-size: 14px;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    }
-
-    .cookie-banner.visible {
-      transform: translateY(0);
-    }
-
-    .cookie-btn {
-      background: var(--bg-color);
-      color: var(--text-color);
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 13px;
-      transition: opacity 0.2s;
-    }
-
-    .cookie-btn:hover {
-      opacity: 0.9;
-    }
-
-    /* 
       GENERAL ANIMATIONS 
       ---------------------------------------
     */
@@ -532,13 +490,6 @@
   </div> <!-- End Content Col -->
 </div> <!-- End Container -->
 
-<!-- COOKIE BANNER -->
-<div id="cookie-banner" class="cookie-banner">
-    <span>I use cookies to analyze traffic and improve experience. Is that cool?</span>
-    <button id="accept-cookies" class="cookie-btn">Accept</button>
-    <button id="decline-cookies" class="cookie-btn" style="background:transparent; color:inherit; border:1px solid currentColor;">Decline</button>
-</div>
-
 <!-- SCRIPTS -->
 <script>
   /* 
@@ -597,38 +548,14 @@
   });
 
   /* 
-     2. ANALYTICS & COOKIE CONSENT 
+     2. ANALYTICS (AUTO-LOAD)
      --------------------------------------- 
   */
-  const banner = document.getElementById('cookie-banner');
-  const acceptBtn = document.getElementById('accept-cookies');
-  const declineBtn = document.getElementById('decline-cookies');
-  
-  // Check localStorage for consent status
-  if (!localStorage.getItem('cookieConsent')) {
-    // Show banner after short delay
-    setTimeout(() => banner.classList.add('visible'), 1500);
-  } else if (localStorage.getItem('cookieConsent') === 'accepted') {
-    // Already accepted -> Load Analytics
-    loadAnalytics();
-  }
+  // Automatically load analytics on page view
+  loadAnalytics();
 
-  // Handle Accept
-  acceptBtn.addEventListener('click', () => {
-    localStorage.setItem('cookieConsent', 'accepted');
-    banner.classList.remove('visible');
-    loadAnalytics();
-  });
-
-  // Handle Decline
-  declineBtn.addEventListener('click', () => {
-    localStorage.setItem('cookieConsent', 'declined');
-    banner.classList.remove('visible');
-  });
-
-  // Analytics Loader Function
   function loadAnalytics() {
-    console.log("Consent granted. Loading analytics...");
+    console.log("Analytics loaded automatically.");
 
     // 1. Google Analytics (G-CP2M6FKBXK)
     const gaScript = document.createElement('script');
