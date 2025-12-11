@@ -33,12 +33,15 @@
     .btn-cv { background-color: var(--btn-bg); color: var(--btn-text) !important; padding: 10px 20px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; transition: transform 0.2s ease, opacity 0.2s ease; }
     .btn-cv:hover { transform: translateY(-1px); opacity: 0.9; }
 
-    /* CONTENT */
+    /* LAYOUT & ALIGNMENT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
     .content-grid { display: grid; grid-template-columns: var(--sidebar-width) 1fr; width: 100%; }
     
     .icon-col { padding-top: 5px; }
-    .theme-toggle { width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; }
+    .theme-toggle { 
+        width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; 
+        margin-left: 22px; /* ALIGNMENT FIX */
+    }
     .theme-toggle svg { width: 24px; height: 24px; display: block; }
     body.day .icon-moon { display: block !important; fill: #333; }
     body.day .icon-sun { display: none !important; }
@@ -55,6 +58,7 @@
       .nav-links { gap: 16px; }
       .nav-links a.text-link { font-size: 14px; }
       .btn-cv { padding: 8px 16px; font-size: 13px; }
+      .icon-col { margin-bottom: 40px; }
     }
   </style>
 </head>
@@ -64,6 +68,7 @@
   <header class="main-header">
     <a href="/" class="logo-circle"><img src="images/profile-avatar.png" alt="Eugene Evgen"></a>
     <nav class="nav-links">
+      <a href="/" class="text-link">Experience</a>
       <a href="works.html" class="text-link">Works</a>
       <a href="contact.html" class="text-link" style="opacity: 0.5; cursor: default;">Contact</a>
       <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
@@ -82,14 +87,13 @@
        <h1>Get in touch</h1>
        <p>
          I'm always open to discussing new opportunities, design, or AI.
-         You can email me at <a href="mailto:your.email@example.com" class="inline-link">your.email@example.com</a> or connect via <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank" class="inline-link">LinkedIn</a>.
+         You can email me at <a href="mailto:ievgen.contact@gmail.com" class="inline-link">ievgen.contact@gmail.com</a> or connect via <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank" class="inline-link">LinkedIn</a>.
        </p>
     </div>
   </div>
 </div>
 
 <script>
-  // Shared Script
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -104,7 +108,6 @@
       }
   });
 
-  // Analytics
   const gaScript = document.createElement('script'); gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CP2M6FKBXK'; gaScript.async = true; document.head.appendChild(gaScript);
   window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-CP2M6FKBXK');
   (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "ujw6gp5k0v");
