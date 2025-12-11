@@ -320,8 +320,8 @@
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
   
-  // Custom HTML content for the Xebia row with Clickable Links
-  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, ADNOC, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
+  // Custom HTML content for the Xebia row with ALL Clickable Links (Includes ADNOC)
+  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
       // Check if this is the Xebia row
