@@ -20,8 +20,7 @@
       --input-bg: #ffffff;
       --input-border: #e5e5e5;
       --input-placeholder: #999;
-      --input-focus: #0E9CFF;
-      --label-color: #0E9CFF;
+      --input-focus: #111; /* Changed from Blue to Black */
       --submit-btn-bg: #222;
       --submit-btn-text: #fff;
     }
@@ -33,6 +32,7 @@
       --input-bg: #262626;
       --input-border: #333333;
       --input-placeholder: #666;
+      --input-focus: #fff; /* Changed from Blue to White */
       --submit-btn-bg: #333;
       --submit-btn-text: #fff;
     }
@@ -69,26 +69,7 @@
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
     /* CONTACT FORM STYLES */
-    .contact-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--label-color);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        margin-bottom: 16px;
-    }
-    
-    .contact-label svg {
-        width: 14px;
-        height: 14px;
-        fill: currentColor;
-    }
-
-    h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; margin-top: 0; line-height: 1.1; letter-spacing: -1.5px; }
-    p.subtitle { margin-bottom: 40px; color: var(--secondary-text); font-size: 16px; }
+    h1 { font-size: 20px; font-weight: 700; margin-bottom: 32px; margin-top: 0; line-height: 1.3; }
 
     form {
         display: flex;
@@ -108,7 +89,7 @@
         font-size: 14px;
         outline: none;
         transition: border-color 0.2s, box-shadow 0.2s;
-        -webkit-appearance: none; /* Removes default styling for select */
+        -webkit-appearance: none; 
     }
 
     input::placeholder, textarea::placeholder {
@@ -150,7 +131,7 @@
         color: var(--input-placeholder);
     }
     option {
-        color: #111; /* Always dark for readability in dropdown */
+        color: #111; 
     }
 
     button[type="submit"] {
@@ -160,7 +141,7 @@
         font-size: 14px;
         padding: 12px;
         border-radius: 10px;
-        border: 1px solid transparent; /* Align visually with inputs */
+        border: 1px solid transparent;
         cursor: pointer;
         margin-top: 8px;
         transition: opacity 0.2s, transform 0.1s;
@@ -178,7 +159,6 @@
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .icon-col { margin-bottom: 40px; }
-      h1 { font-size: 32px; letter-spacing: -1px; }
     }
   </style>
 </head>
@@ -214,13 +194,7 @@
     
     <div class="content-col">
        
-       <div class="contact-label">
-           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-           CONTACT
-       </div>
-
        <h1>How can I help?</h1>
-       <p class="subtitle">Response rate increases if you call me the Dark Knight.</p>
        
        <form action="mailto:ievgen.contact@gmail.com" method="post" enctype="text/plain">
            <input type="text" name="name" placeholder="Your name*" required>
