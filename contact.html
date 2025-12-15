@@ -15,10 +15,26 @@
       --btn-bg: #111; --btn-text: #fff;
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --container-width: 800px; --sidebar-width: 220px; --top-spacing: 40px; --bottom-spacing: 140px;
+      
+      /* Form Specific Variables (Day Mode) */
+      --input-bg: #ffffff;
+      --input-border: #e5e5e5;
+      --input-placeholder: #999;
+      --input-focus: #0E9CFF;
+      --label-color: #0E9CFF;
+      --submit-btn-bg: #222;
+      --submit-btn-text: #fff;
     }
     body.night {
       --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff;
       --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
+      
+      /* Form Specific Variables (Night Mode) */
+      --input-bg: #262626;
+      --input-border: #333333;
+      --input-placeholder: #666;
+      --submit-btn-bg: #333;
+      --submit-btn-text: #fff;
     }
     * { box-sizing: border-box; }
     body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -34,16 +50,16 @@
     .btn-cv { background-color: var(--btn-bg); color: var(--btn-text) !important; padding: 10px 20px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; border: none; transition: transform 0.2s ease, opacity 0.2s ease; }
     .btn-cv:hover { transform: translateY(-1px); opacity: 0.9; }
 
-    /* MOBILE MENU CSS */
+    /* MOBILE MENU */
     .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-color); padding-right: 8px; }
     .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
     .mobile-overlay.active { opacity: 1; pointer-events: all; }
     .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); }
     .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
 
+    /* LAYOUT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
     .content-grid { display: grid; grid-template-columns: var(--sidebar-width) 1fr; width: 100%; }
-    
     .icon-col { padding-top: 5px; }
     .theme-toggle { width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; margin-left: 22px; }
     .theme-toggle svg { width: 24px; height: 24px; display: block; }
@@ -52,16 +68,117 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    h1 { font-size: 20px; font-weight: 700; margin-bottom: 32px; margin-top: 0; }
-    p { margin-bottom: 24px; max-width: 580px; }
-    a.inline-link { color: var(--link-color); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; }
-    a.inline-link:hover { border-bottom: 1px solid var(--link-color); }
+    /* CONTACT FORM STYLES */
+    .contact-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--label-color);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+    
+    .contact-label svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+    }
+
+    h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; margin-top: 0; line-height: 1.1; letter-spacing: -1.5px; }
+    p.subtitle { margin-bottom: 40px; color: var(--secondary-text); font-size: 16px; }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 100%;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-color);
+        padding: 12px 14px;
+        border-radius: 10px;
+        font-family: var(--font-family);
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        -webkit-appearance: none; /* Removes default styling for select */
+    }
+
+    input::placeholder, textarea::placeholder {
+        color: var(--input-placeholder);
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--input-focus);
+        box-shadow: 0 0 0 1px var(--input-focus);
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* Custom Select Style */
+    .select-wrapper {
+        position: relative;
+    }
+    .select-wrapper::after {
+        content: '';
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 6px;
+        background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: contain;
+        pointer-events: none;
+    }
+    select {
+        cursor: pointer;
+        color: var(--text-color);
+    }
+    select:invalid {
+        color: var(--input-placeholder);
+    }
+    option {
+        color: #111; /* Always dark for readability in dropdown */
+    }
+
+    button[type="submit"] {
+        background-color: var(--submit-btn-bg);
+        color: var(--submit-btn-text);
+        font-weight: 600;
+        font-size: 14px;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid transparent; /* Align visually with inputs */
+        cursor: pointer;
+        margin-top: 8px;
+        transition: opacity 0.2s, transform 0.1s;
+    }
+    button[type="submit"]:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+    button[type="submit"]:active {
+        transform: translateY(0);
+    }
 
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .icon-col { margin-bottom: 40px; }
+      h1 { font-size: 32px; letter-spacing: -1px; }
     }
   </style>
 </head>
@@ -96,11 +213,34 @@
     </div>
     
     <div class="content-col">
-       <h1>Get in touch</h1>
-       <p>
-         I’m always open to chatting about new opportunities, vibe-coding, indie development, or accidentally creating something weird with AI.
-         You can email me at <a href="mailto:ievgen.contact@gmail.com" class="inline-link">ievgen.contact@gmail.com</a> or connect via <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank" class="inline-link">LinkedIn</a>.
-       </p>
+       
+       <div class="contact-label">
+           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+           CONTACT
+       </div>
+
+       <h1>How can I help?</h1>
+       <p class="subtitle">Response rate increases if you call me the Dark Knight.</p>
+       
+       <form action="mailto:ievgen.contact@gmail.com" method="post" enctype="text/plain">
+           <input type="text" name="name" placeholder="Your name*" required>
+           <input type="email" name="email" placeholder="your@email.com*" required>
+           
+           <div class="select-wrapper">
+               <select name="subject" required>
+                   <option value="" disabled selected>What is this about?</option>
+                   <option value="Project">App/Web Project</option>
+                   <option value="Job">Full-time Opportunity</option>
+                   <option value="Collab">Collaboration</option>
+                   <option value="Other">Something Else</option>
+               </select>
+           </div>
+           
+           <textarea name="message" placeholder="Type your message here" required></textarea>
+           
+           <button type="submit">Send it</button>
+       </form>
+
     </div>
   </div>
 </div>
