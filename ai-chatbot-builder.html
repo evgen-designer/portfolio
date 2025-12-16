@@ -8,7 +8,7 @@
   <link rel="icon" href="images/icon-192.png" type="image/png">
   
   <style>
-    /* --- CORE VARIABLES (Inherited) --- */
+    /* --- CORE VARIABLES --- */
     :root {
       --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
       --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
@@ -55,6 +55,28 @@
     }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
 
+    /* MOBILE MENU - FIXED */
+    .mobile-menu-btn { display: none; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-color); padding-right: 8px; }
+    
+    .mobile-overlay { 
+        position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
+        background-color: var(--bg-color); 
+        z-index: 1000; 
+        display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px; 
+        /* UPDATED: Added visibility hidden to prevent ghost links */
+        opacity: 0; visibility: hidden; pointer-events: none; 
+        transition: opacity 0.3s ease, visibility 0.3s ease; 
+        padding: 20px; 
+    }
+    .mobile-overlay.active { 
+        opacity: 1; visibility: visible; pointer-events: all; 
+    }
+    .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); }
+    .mobile-btn-cv { 
+        background-color: var(--btn-bg); color: var(--btn-text);
+        font-size: 18px; padding: 14px 28px; border-radius: 100px; text-decoration: none; font-weight: 600;
+    }
+
     /* LAYOUT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
     .content-grid { display: grid; grid-template-columns: var(--sidebar-width) 1fr; width: 100%; }
@@ -67,12 +89,10 @@
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
     /* --- CASE STUDY STYLES --- */
-    
     .case-tag {
         font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
         font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block;
     }
-
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 16px 0; }
     .intro { font-size: 18px; color: var(--secondary-text); margin-bottom: 32px; max-width: 540px; }
 
@@ -92,7 +112,6 @@
         border-radius: 12px;
         margin-bottom: 60px;
         border: 1px solid var(--divider-color);
-        /* Pattern matching cards */
         background-image: radial-gradient(var(--secondary-text) 1px, transparent 1px);
         background-size: 20px 20px;
         opacity: 0.8;
@@ -146,6 +165,8 @@
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
       .meta-grid { grid-template-columns: 1fr; gap: 32px; }
       h1 { font-size: 28px; }
     }
@@ -153,22 +174,25 @@
 </head>
 <body class="day">
 
+<!-- MOBILE OVERLAY -->
 <div class="mobile-overlay">
     <a href="/" class="mobile-link">Experience</a>
     <a href="works.html" class="mobile-link">Works</a>
     <a href="contact.html" class="mobile-link">Contact</a>
-    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
+    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="mobile-btn-cv" target="_blank">Download CV</a>
 </div>
 
 <div class="container">
   <header class="main-header">
     <a href="/" class="logo-circle"><img src="images/profile-avatar.png" alt="Eugene Evgen"></a>
     
-    <!-- Changed Nav: Only "Back to works" (Secondary Style) -->
-    <a href="works.html" class="btn-back">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to works
-    </a>
+    <nav class="nav-links">
+        <a href="works.html" class="btn-back">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to works
+        </a>
+    </nav>
+    <div class="mobile-menu-btn">Menu</div>
   </header>
 
   <div class="content-grid animated fadeIn">
@@ -266,6 +290,24 @@
           body.classList.remove('day'); body.classList.add('night'); localStorage.setItem('theme', 'night');
       } else {
           body.classList.remove('night'); body.classList.add('day'); localStorage.setItem('theme', 'day');
+      }
+  });
+  
+  // Mobile Menu Logic
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const overlay = document.querySelector('.mobile-overlay');
+  let isMenuOpen = false;
+
+  menuBtn.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      if(isMenuOpen) {
+          overlay.classList.add('active');
+          menuBtn.innerText = "Close";
+          document.body.style.overflow = 'hidden';
+      } else {
+          overlay.classList.remove('active');
+          menuBtn.innerText = "Menu";
+          document.body.style.overflow = '';
       }
   });
 </script>
