@@ -20,7 +20,7 @@
       --meta-label: #888;
       --image-bg: #e0e0e0;
       --code-bg: #fff;
-      --slide-bg: #000;
+      --slide-bg: #111;
       --slide-text: #fff;
     }
     body.night {
@@ -57,7 +57,7 @@
     body.night .btn-back:hover { background-color: rgba(255,255,255,0.1); }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
 
-    /* MOBILE MENU (Hidden/Disabled per request) */
+    /* MOBILE MENU (Hidden) */
     .mobile-menu-btn { display: none; }
     .mobile-overlay { display: none; }
 
@@ -84,34 +84,27 @@
 
     /* Hero Image */
     .hero-image {
-        width: 100%; height: 320px;
+        width: 100%; height: auto;
         background-color: var(--image-bg);
         border-radius: 12px;
         margin-bottom: 60px;
         border: 1px solid var(--divider-color);
-        background-image: radial-gradient(var(--secondary-text) 1px, transparent 1px);
-        background-size: 20px 20px;
-        opacity: 0.8;
-        display: flex; align-items: center; justify-content: center;
-        color: var(--secondary-text); font-size: 14px;
+        overflow: hidden;
     }
+    .hero-image img { width: 100%; height: auto; display: block; }
 
-    /* 2-Column Meta Grid (Specific for this page) */
+    /* 2-Column Meta Grid */
     .role-results-grid {
         display: grid; grid-template-columns: 1fr 1fr;
         gap: 40px; margin-bottom: 80px;
         padding-bottom: 40px; border-bottom: 1px solid var(--divider-color);
     }
     .role-results-item h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
-    .role-results-item p { font-size: 15px; margin: 0 0 8px 0; font-weight: 600; }
     
     .role-list { list-style: none; padding: 0; margin: 0; }
     .role-list li { 
         font-size: 15px; color: var(--secondary-text); margin-bottom: 8px; 
-        position: relative; padding-left: 12px;
-    }
-    .role-list li::before {
-        content: "•"; position: absolute; left: 0; color: var(--text-color);
+        position: relative; padding-left: 0;
     }
 
     /* Big Text Slide */
@@ -135,7 +128,7 @@
         margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px;
     }
     
-    .process-step { margin-bottom: 60px; }
+    .process-step { margin-bottom: 80px; }
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
     .media-block {
@@ -145,11 +138,8 @@
         overflow: hidden;
         margin: 24px 0;
         border: 1px solid var(--divider-color);
-        display: flex; align-items: center; justify-content: center;
-        min-height: 240px;
     }
     .media-block img { width: 100%; height: auto; display: block; }
-    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
     
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
@@ -201,7 +191,7 @@
        <p class="intro">I was tasked to design an AI-powered Asset Management experience for an enterprise real-estate investment platform, transforming fragmented portfolio data into real-time.</p>
 
        <div class="hero-image">
-           <div class="img-placeholder">[Image: gocanopy-01.png]</div>
+           <img src="images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
        </div>
 
        <!-- 2 Columns: Role & Results -->
@@ -232,7 +222,7 @@
        </div>
 
        <div class="media-block">
-            <div class="img-placeholder">[Image: gocanopy-02.png]</div>
+            <img src="images/gocanopy-02.png" alt="Prototype Screen">
        </div>
        <p class="nda-note">NDA-protected project - business-sensitive details omitted. Full story with deeper insights available upon request.</p>
 
@@ -241,42 +231,42 @@
        <div class="process-step">
            <h3>Step 1 - Countless collaborative sessions with the CEO and CTO:</h3>
            <div class="media-block">
-               <div class="img-placeholder">[Image: gocanopy-03.png]</div>
+               <img src="images/gocanopy-03.png" alt="Collaboration Session">
            </div>
        </div>
 
        <div class="process-step">
            <h3>Step 2 - Analysis of meeting transcripts and research data using Google AI Studio:</h3>
            <div class="media-block">
-               <div class="img-placeholder">[Image: gocanopy-04.png]</div>
+               <img src="images/gocanopy-04.png" alt="AI Research Analysis">
            </div>
        </div>
 
        <div class="process-step">
            <h3>Step 3 - Capturing early insights and requirements in FigJam:</h3>
            <div class="media-block">
-               <div class="img-placeholder">[Image: gocanopy-05.png]</div>
+               <img src="images/gocanopy-05.png" alt="FigJam Insights">
            </div>
        </div>
 
        <div class="process-step">
            <h3>Step 4 - Early idea explorations for implementation approaches, using V0.dev and Claude:</h3>
            <div class="media-block">
-               <div class="img-placeholder">[Image: gocanopy-06.png]</div>
+               <img src="images/gocanopy-06.png" alt="AI Prototyping Explorations">
            </div>
        </div>
 
        <div class="process-step">
            <h3>Step 5 - Figma design stages overview (excluding the design system library and clickable prototype):</h3>
            <div class="media-block">
-               <div class="img-placeholder">[Image: gocanopy-07.png]</div>
+               <img src="images/gocanopy-07.png" alt="Figma Design Overview">
            </div>
        </div>
 
        <div class="process-step">
            <h3>Step 6 - User feedback, refinement, and implementation support (preview of design snippets).</h3>
            <div class="media-block">
-               <div class="img-placeholder">[Image: gocanopy-08.png]</div>
+               <img src="images/gocanopy-08.png" alt="Implementation Support">
            </div>
        </div>
 
