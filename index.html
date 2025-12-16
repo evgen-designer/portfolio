@@ -67,6 +67,8 @@
         border-radius: 100px; border: 1px solid var(--header-border); 
         width: 100%; position: relative; z-index: 1001; 
     }
+    
+    /* LOGO - Now interactive on hover */
     .logo-circle { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0; transition: transform 0.2s ease; display: block; }
     .logo-circle:hover { transform: scale(1.05); }
     .logo-circle img { width: 100%; height: 100%; object-fit: cover; display: block;}
@@ -84,12 +86,15 @@
         background-color: var(--bg-color);
         z-index: 1000; 
         display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 32px;
-        opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.3s ease, visibility 0.3s ease;
         padding: 20px;
     }
-    .mobile-overlay.active { opacity: 1; pointer-events: all; }
+    .mobile-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
     .mobile-link { font-size: 24px; font-weight: 600; text-decoration: none; color: var(--text-color); }
-    .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
+    .mobile-btn-cv { 
+        background-color: var(--btn-bg); color: var(--btn-text);
+        font-size: 18px; padding: 14px 28px; border-radius: 100px; text-decoration: none; font-weight: 600;
+    }
 
     /* LAYOUT & ALIGNMENT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
@@ -163,7 +168,7 @@
     /* ANIMATIONS */
     .animated { animation-duration: 1s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
-    .one { animation-delay: 0.1s; } .two { animation-delay: 0.5s; } .three { animation-delay: 0.9s; } .four { animation-delay: 1.1s; }
+    .one { animation-delay: 0.1s; } .two { animation-delay: 0.5s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* MOBILE BREAKPOINT */
@@ -193,7 +198,7 @@
     <a href="/" class="mobile-link">Experience</a>
     <a href="works.html" class="mobile-link">Works</a>
     <a href="contact.html" class="mobile-link">Contact</a>
-    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
+    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="mobile-btn-cv" target="_blank">Download CV</a>
 </div>
 
 <div class="container">
@@ -221,7 +226,6 @@
     <div class="content-col">
       <h1>Hi, I'm Eugene — AI-Driven Product Designer.</h1>
 
-      <!-- NEW BADGES -->
       <div class="badge-row">
         <span class="badge">V0</span>
         <span class="badge">Figma Make</span>
@@ -354,7 +358,7 @@
   // 4. Tooltip & Links Injection (Desktop Only)
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
-  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
+  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
       const isXebia = element.querySelector('h2 a').href.includes('xebia');
