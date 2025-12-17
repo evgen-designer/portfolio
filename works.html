@@ -66,6 +66,7 @@
         display: flex;
         flex-direction: column;
         gap: 32px;
+        width: 100%; /* Ensure container takes full width */
     }
 
     .work-card {
@@ -78,6 +79,7 @@
         color: var(--text-color);
         transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         position: relative;
+        width: 100%;
     }
 
     .work-card:hover {
@@ -99,6 +101,34 @@
         align-items: center;
         justify-content: center;
         border-bottom: 1px solid var(--card-border);
+    }
+    
+    /* Image inside Card */
+    .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+    .work-card:hover .card-img {
+        transform: scale(1.03);
+    }
+
+    /* Badge Style */
+    .card-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 5px 10px;
+        border-radius: 100px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        z-index: 10;
+        letter-spacing: 0.02em;
     }
 
     /* Floating UI Elements (CSS Mockups) */
@@ -128,6 +158,7 @@
         align-items: center;
         gap: 10px;
         width: 260px;
+        max-width: 90%; /* Prevent overflow on small screens */
         position: absolute;
         transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -158,9 +189,10 @@
         position: absolute;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         padding: 14px;
+        box-sizing: border-box; /* Fix for padding increasing width */
     }
-    .widget-main { width: 280px; height: 140px; top: 50%; transform: translateY(-50%); z-index: 2; display: flex; flex-direction: column; justify-content: space-between; }
-    .widget-sub { width: 240px; height: 100px; top: 15px; left: 50%; transform: translateX(-50%) scale(0.9); opacity: 0.5; z-index: 1; }
+    .widget-main { width: 280px; max-width: 90%; height: 140px; top: 50%; transform: translateY(-50%); z-index: 2; display: flex; flex-direction: column; justify-content: space-between; }
+    .widget-sub { width: 240px; max-width: 80%; height: 100px; top: 15px; left: 50%; transform: translateX(-50%) scale(0.9); opacity: 0.5; z-index: 1; }
     
     .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 60px; }
     .bar { width: 20px; background: #eee; border-radius: 4px 4px 0 0; transition: height 0.4s ease; }
@@ -175,27 +207,6 @@
 
     .work-card:hover .widget-sub { top: 5px; opacity: 0.3; }
     .work-card:hover .bar:nth-child(2) { height: 90%; }
-
-    /* Style 3: Investment Grid (New) */
-    .grid-ui {
-        display: grid; grid-template-columns: 80px 1fr; gap: 12px;
-        width: 300px; height: 160px;
-        background: var(--ui-elem-bg); border: 1px solid var(--ui-elem-border);
-        border-radius: 8px; padding: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    .grid-sidebar { background: #f9f9f9; border-radius: 4px; height: 100%; }
-    .grid-content { display: flex; flex-direction: column; gap: 8px; }
-    .grid-row { height: 24px; background: #f0f0f0; border-radius: 4px; width: 100%; transition: width 0.4s ease; }
-    .grid-row:nth-child(2) { width: 80%; }
-    .grid-row:nth-child(3) { width: 60%; }
-    
-    body.night .grid-sidebar { background: #333; }
-    body.night .grid-row { background: #444; }
-
-    .work-card:hover .grid-row:nth-child(2) { width: 100%; }
-    .work-card:hover .grid-row:nth-child(3) { width: 90%; }
-
 
     /* Card Text Content (Bottom) */
     .card-content { padding: 24px; }
@@ -217,8 +228,8 @@
       .icon-col { margin-bottom: 40px; }
       
       .card-visual { height: 200px; }
-      .flow-node { width: 220px; }
-      .widget-main { width: 240px; }
+      /* Ensure text doesn't overflow */
+      .card-content h2, .card-content p { word-wrap: break-word; }
     }
   </style>
 </head>
@@ -229,7 +240,7 @@
     <a href="/" class="mobile-link">Experience</a>
     <a href="works.html" class="mobile-link">Works</a>
     <a href="contact.html" class="mobile-link">Contact</a>
-    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="mobile-btn-cv" target="_blank">Download CV</a>
+    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
 </div>
 
 <div class="container">
@@ -256,21 +267,11 @@
        
        <div class="cards-container">
            
-           <!-- PROJECT 3: AI Investment Platform (NEW) -->
+           <!-- PROJECT 3: AI Investment Platform (NEW - With Image) -->
            <a href="ai-investment-platform.html" class="work-card">
                <div class="card-visual">
-                   <div class="ui-wrapper">
-                       <!-- CSS Mockup: Investment Grid -->
-                       <div class="grid-ui">
-                           <div class="grid-sidebar"></div>
-                           <div class="grid-content">
-                               <div class="grid-row" style="height: 12px; width: 40%; background: #ddd;"></div>
-                               <div class="grid-row"></div>
-                               <div class="grid-row"></div>
-                               <div class="grid-row" style="width: 70%"></div>
-                           </div>
-                       </div>
-                   </div>
+                   <div class="card-badge">Won Fortune 500 client</div>
+                   <img src="images/gocanopy-01.png" alt="AI Investment Platform" class="card-img">
                </div>
                <div class="card-content">
                    <div class="card-meta">
