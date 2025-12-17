@@ -108,12 +108,7 @@
         letter-spacing: 0.02em;
         transition: background-color 0.3s, color 0.3s;
     }
-    
-    /* Dark Mode specific badge color */
-    body.night .hero-badge {
-        background-color: #54D1FF;
-        color: #000;
-    }
+    body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
     /* Big Text Slide */
     .text-slide {
@@ -133,26 +128,28 @@
         font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px;
     }
 
-    /* --- DETAILS GRID (Role, Time, Lists) --- */
-    .details-container {
+    /* --- REVISED DETAILS LAYOUT --- */
+    .project-details-wrapper {
         margin-bottom: 80px;
     }
 
-    /* The Top Row (Task & Timeframe) */
-    .details-row-top {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
+    .detail-block {
         margin-bottom: 40px;
+    }
+
+    /* Divider after Timeframe */
+    .detail-block.last-top {
         padding-bottom: 40px;
         border-bottom: 1px solid var(--divider-color);
+        margin-bottom: 40px;
     }
-    
-    /* The Bottom Row (Key Focus & Results) */
-    .details-row-bottom {
+
+    /* 2 Column Grid for Bottom Section */
+    .split-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 60px;
+        align-items: start;
     }
 
     .section-label { 
@@ -160,21 +157,14 @@
         color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; 
     }
     
-    /* Bold text for Task Description */
-    .task-text {
-        font-size: 16px;
+    /* Highlight Text for Task & Timeframe */
+    .text-highlight {
+        font-size: 20px;
         color: var(--text-color);
-        font-weight: 700; /* Bold as per request */
+        font-weight: 700;
         line-height: 1.5;
         margin: 0;
-    }
-
-    /* Bold text for Timeframe */
-    .timeframe-text {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--text-color);
-        margin: 0;
+        max-width: 680px; /* Keep line length readable */
     }
 
     /* Lists */
@@ -248,7 +238,7 @@
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
       .nav-links { display: flex; } 
-      .details-row-top, .details-row-bottom { grid-template-columns: 1fr; gap: 40px; }
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
     }
@@ -292,25 +282,25 @@
            "Real estate investment teams lose time and decision quality due to highly fragmented, inconsistent data scattered across drives, inboxes, PDFs, spreadsheets, and manual processes."
        </div>
 
-       <!-- Project Details Container -->
-       <div class="details-container">
+       <!-- Project Details Wrapper -->
+       <div class="project-details-wrapper">
            
-           <!-- Top Row: Task & Timeframe (Separated by line below) -->
-           <div class="details-row-top">
-               <div>
-                   <h4 class="section-label">MY TASK</h4>
-                   <p class="task-text">
-                       Design an MVP Asset Management experience for an enterprise client presentation, unifying fragmented real estate data into a single, decision-ready workflow and integrate it into existing investment platform.
-                   </p>
-               </div>
-               <div>
-                   <h4 class="section-label">TASK TIMEFRAME</h4>
-                   <p class="timeframe-text">2 months</p>
-               </div>
+           <!-- Block 1: My Task -->
+           <div class="detail-block">
+               <h4 class="section-label">MY TASK</h4>
+               <p class="text-highlight">
+                   Design an MVP Asset Management experience for an enterprise client presentation, unifying fragmented real estate data into a single, decision-ready workflow and integrate it into existing investment platform.
+               </p>
            </div>
 
-           <!-- Bottom Row: Focus Areas & Results -->
-           <div class="details-row-bottom">
+           <!-- Block 2: Timeframe (Separated by Divider) -->
+           <div class="detail-block last-top">
+               <h4 class="section-label">TASK TIMEFRAME</h4>
+               <p class="text-highlight">2 months</p>
+           </div>
+
+           <!-- Block 3: Split Grid (Focus & Results) -->
+           <div class="split-grid">
                <div>
                    <h4 class="section-label">KEY FOCUS AREAS</h4>
                    <ul class="detail-list">
