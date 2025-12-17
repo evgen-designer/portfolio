@@ -116,16 +116,17 @@
         color: #000;
     }
 
-    /* Meta Grid (Top Section) */
+    /* Meta Grid (Top Section - Role & Timeframe) */
     .meta-grid {
         display: grid; grid-template-columns: 1fr 1fr;
-        gap: 24px; margin-bottom: 40px;
-        padding-bottom: 40px; border-bottom: 1px solid var(--divider-color);
+        gap: 24px; 
+        margin-bottom: 32px; /* Spacing before line */
+        padding-bottom: 32px; border-bottom: 1px solid var(--divider-color);
     }
     .meta-item h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-label); margin: 0 0 8px 0; font-weight: 600; }
-    .meta-item p { font-size: 15px; margin: 0; font-weight: 600; }
+    .meta-item p { font-size: 18px; margin: 0; font-weight: 700; color: var(--text-color); }
 
-    /* 2-Column Lists Grid */
+    /* 2-Column Lists Grid (Responsibilities & Results) */
     .role-results-grid {
         display: grid; grid-template-columns: 1fr 1fr;
         gap: 40px; margin-bottom: 80px;
@@ -135,8 +136,8 @@
     
     .role-list { list-style: none; padding: 0; margin: 0; }
     .role-list li { 
-        font-size: 15px; color: var(--secondary-text); margin-bottom: 8px; 
-        position: relative; padding-left: 12px;
+        font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; 
+        position: relative; padding-left: 14px; line-height: 1.5;
     }
     .role-list li::before {
         content: "•"; position: absolute; left: 0; color: var(--text-color);
@@ -239,42 +240,42 @@
 
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Empowering enterprise investment teams to scale portfolio decisions with AI</h1>
-       <p class="intro">I was tasked to design an AI-powered Asset Management experience for an enterprise real-estate investment platform, transforming fragmented portfolio data into real-time insights.</p>
+       <p class="intro">Lead the end-to-end design of an MVP that transformed fragmented portfolio data into a single, decision-ready workflow for enterprise stakeholders.</p>
 
        <div class="hero-image">
            <div class="hero-badge">Won Fortune 500 client</div>
            <img src="images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
        </div>
 
-       <!-- Section 1: Meta Grid (High Level) -->
+       <!-- Section 1: Meta Grid (Role & Timeframe) -->
        <div class="meta-grid">
            <div class="meta-item">
-               <h4>My Role</h4>
+               <h4>MY ROLE</h4>
                <p>Lead Product Designer</p>
            </div>
            <div class="meta-item">
-               <h4>Timeframe</h4>
+               <h4>TIMEFRAME</h4>
                <p>2 Months</p>
            </div>
        </div>
 
-       <!-- Section 2: Detailed Lists (2 Columns) -->
+       <!-- Section 2: Detailed Lists (Key Responsibilities & Results) -->
        <div class="role-results-grid">
            <div class="role-results-item">
-               <h4>Key Responsibilities</h4>
+               <h4>KEY RESPONSIBILITIES</h4>
                <ul class="role-list">
                    <li>User research, workflow analysis, and problem framing</li>
                    <li>End-to-end UX & UI design (MVP → prototype)</li>
                    <li>AI-assisted insight design and data visualization</li>
-                   <li>Prototyping, client presentations, and stakeholder alignment</li>
+                   <li>Prototyping, stakeholder presentations and alignment</li>
                </ul>
            </div>
            <div class="role-results-item">
-               <h4>Results</h4>
+               <h4>RESULTS</h4>
                <ul class="role-list">
                    <li>Helped secure a Fortune 500 enterprise client partnership</li>
                    <li>Reduced manual reporting effort by ~60% by centralizing portfolio data into a single workflow</li>
-                   <li>Improved decision turnaround time by 2–3× with real-time portfolio visibility</li>
+                   <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
                </ul>
            </div>
        </div>
