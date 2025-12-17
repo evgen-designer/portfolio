@@ -57,6 +57,10 @@
     body.night .btn-back:hover { background-color: rgba(255,255,255,0.1); }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
 
+    /* MOBILE MENU (Hidden) */
+    .mobile-menu-btn { display: none; }
+    .mobile-overlay { display: none; }
+
     /* LAYOUT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
     .content-grid { display: grid; grid-template-columns: var(--sidebar-width) 1fr; width: 100%; }
@@ -104,13 +108,14 @@
         letter-spacing: 0.02em;
         transition: background-color 0.3s, color 0.3s;
     }
+    
     /* Dark Mode specific badge color */
     body.night .hero-badge {
         background-color: #54D1FF;
         color: #000;
     }
 
-    /* Slides (Problem Statement & Figma) */
+    /* Big Text Slide */
     .text-slide {
         background-color: var(--slide-bg);
         color: var(--slide-text);
@@ -128,70 +133,77 @@
         font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px;
     }
 
-    /* --- NEW GRID LAYOUT (Example 4) --- */
-    .project-details {
-        display: flex;
-        flex-direction: column;
+    /* --- DETAILS GRID (Role, Time, Lists) --- */
+    .details-container {
         margin-bottom: 80px;
-        border-bottom: 1px solid var(--divider-color);
-        padding-bottom: 40px;
     }
 
-    .details-row {
+    /* The Top Row (Task & Timeframe) */
+    .details-row-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--divider-color);
+    }
+    
+    /* The Bottom Row (Key Focus & Results) */
+    .details-row-bottom {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 60px;
     }
-    
-    .details-row.top {
-        padding-bottom: 40px;
-        margin-bottom: 40px;
-        border-bottom: 1px solid var(--divider-color);
-    }
 
     .section-label { 
-        font-size: 11px; text-transform: uppercase; letter-spacing: 1px; 
+        font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; 
         color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; 
     }
     
-    .task-description {
+    /* Bold text for Task Description */
+    .task-text {
         font-size: 16px;
         color: var(--text-color);
-        line-height: 1.6;
-        font-weight: 600;
+        font-weight: 700; /* Bold as per request */
+        line-height: 1.5;
+        margin: 0;
     }
 
-    .timeframe-large {
-        font-size: 24px;
+    /* Bold text for Timeframe */
+    .timeframe-text {
+        font-size: 20px;
         font-weight: 700;
         color: var(--text-color);
+        margin: 0;
     }
 
+    /* Lists */
     .detail-list { list-style: none; padding: 0; margin: 0; }
     .detail-list li { 
-        font-size: 15px; color: var(--secondary-text); margin-bottom: 12px; 
-        position: relative; padding-left: 14px; line-height: 1.5;
+        font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; 
+        position: relative; padding-left: 18px; line-height: 1.6;
     }
     .detail-list li::before {
-        content: "•"; position: absolute; left: 0; color: var(--text-color);
+        content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold;
     }
-
+    
+    /* Numbered list for Results */
     .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
     .numbered-list li {
-        font-size: 15px; color: var(--secondary-text); margin-bottom: 12px;
-        position: relative; padding-left: 20px; line-height: 1.5;
+        font-size: 16px; color: var(--secondary-text); margin-bottom: 12px;
+        position: relative; padding-left: 20px; line-height: 1.6;
     }
     .numbered-list li::before {
         counter-increment: result-counter;
         content: counter(result-counter) ".";
-        position: absolute; left: 0; color: var(--text-color); font-weight: 600;
+        position: absolute; left: 0; color: var(--secondary-text); font-weight: 500;
     }
 
     /* Process Section */
     .process-header {
         font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; 
         color: var(--secondary-text); font-weight: 600; 
-        margin-top: 40px; margin-bottom: 40px; padding-top: 20px;
+        margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px;
     }
     
     .process-step { margin-bottom: 60px; }
@@ -236,7 +248,7 @@
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
       .nav-links { display: flex; } 
-      .details-row, .details-row.top { grid-template-columns: 1fr; gap: 40px; }
+      .details-row-top, .details-row-bottom { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
     }
@@ -270,8 +282,6 @@
        <span class="case-tag">AI INTERACTION DESIGN</span>
        <h1>Empowering enterprise investment teams to scale portfolio decisions with AI</h1>
        
-       <!-- Removed Intro Text -->
-
        <div class="hero-image">
            <div class="hero-badge">Won Fortune 500 client</div>
            <img src="images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
@@ -282,34 +292,35 @@
            "Real estate investment teams lose time and decision quality due to highly fragmented, inconsistent data scattered across drives, inboxes, PDFs, spreadsheets, and manual processes."
        </div>
 
-       <!-- Project Details (Split Layout) -->
-       <div class="project-details">
+       <!-- Project Details Container -->
+       <div class="details-container">
            
-           <!-- Top Row -->
-           <div class="details-row top">
-               <div class="detail-item">
+           <!-- Top Row: Task & Timeframe (Separated by line below) -->
+           <div class="details-row-top">
+               <div>
                    <h4 class="section-label">MY TASK</h4>
-                   <p class="task-description">
-                       Lead the design of an MVP prototype to be delivered within 2 months for an in-office enterprise client presentation in London. The goal was to define a new Asset Management experience on top of an existing real estate investment platform, unifying fragmented data sources into a single, decision-ready workflow.
+                   <p class="task-text">
+                       Design an MVP Asset Management experience for an enterprise client presentation, unifying fragmented real estate data into a single, decision-ready workflow and integrate it into existing investment platform.
                    </p>
                </div>
-               <div class="detail-item">
+               <div>
                    <h4 class="section-label">TASK TIMEFRAME</h4>
-                   <p class="timeframe-large">2 months</p>
+                   <p class="timeframe-text">2 months</p>
                </div>
            </div>
 
-           <!-- Bottom Row -->
-           <div class="details-row bottom">
-               <div class="detail-item">
+           <!-- Bottom Row: Focus Areas & Results -->
+           <div class="details-row-bottom">
+               <div>
                    <h4 class="section-label">KEY FOCUS AREAS</h4>
                    <ul class="detail-list">
                        <li>User research, workflow analysis, and problem framing</li>
                        <li>End-to-end UX & UI design (clickable Figma prototype)</li>
                        <li>AI-assisted insight design & data visualization</li>
+                       <li>Stakeholder presentations & alignment</li>
                    </ul>
                </div>
-               <div class="detail-item">
+               <div>
                    <h4 class="section-label">RESULTS</h4>
                    <ul class="numbered-list">
                        <li>Helped secure a Fortune 500 enterprise client partnership</li>
