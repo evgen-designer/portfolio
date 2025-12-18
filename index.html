@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://www.clarity.ms">
 
-  <!-- Note the leading slash / for assets -->
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="icon" href="/images/icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
@@ -51,11 +50,20 @@
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --container-width: 800px; --sidebar-width: 220px; --top-spacing: 40px; --bottom-spacing: 140px;
       --tooltip-bg: #050505; --tooltip-text: #fff;
+      
+      /* Card Variables for Home */
+      --card-bg: #ffffff; --card-border: rgba(0,0,0,0.08);
+      --pattern-dot: #e5e5e5;
+      --ui-elem-bg: #ffffff; --ui-elem-border: #f0f0f0; 
     }
     body.night {
       --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
       --header-bg: rgba(40, 40, 40, 0.6); --header-border: rgba(255, 255, 255, 0.1); --btn-bg: #fff; --btn-text: #000;
       --tooltip-bg: #ffffff; --tooltip-text: #000000;
+      
+      --card-bg: #222222; --card-border: rgba(255,255,255,0.08);
+      --pattern-dot: #333;
+      --ui-elem-bg: #2a2a2a; --ui-elem-border: #383838;
     }
     * { box-sizing: border-box; }
     body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -104,6 +112,67 @@
     h4.label.mt-large { margin-top: 60px; }
     .footer-text { font-size: 14px; color: var(--secondary-text); margin-top: 60px; }
 
+    /* --- MINI CARDS (HOME PAGE) --- */
+    .recent-work-grid { 
+        display: grid; 
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 12px; 
+        margin-top: 48px;
+        margin-bottom: 48px;
+    }
+    
+    .mini-card {
+        display: block;
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        overflow: hidden;
+        text-decoration: none;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+        position: relative;
+    }
+    .mini-card:hover { transform: translateY(-2px); border-color: rgba(120, 120, 120, 0.3); }
+
+    .mini-visual {
+        height: 100px;
+        width: 100%;
+        background-color: var(--bg-color);
+        background-image: radial-gradient(var(--pattern-dot) 1.5px, transparent 1.5px);
+        background-size: 20px 20px;
+        position: relative;
+        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+        border-bottom: 1px solid var(--card-border);
+    }
+    
+    .mini-img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* CSS UI Elements (Scaled for Mini Cards) */
+    .ui-scale-wrapper { transform: scale(0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    
+    /* Flow Nodes */
+    .flow-node { background: var(--ui-elem-bg); border: 1px solid var(--ui-elem-border); padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; width: 180px; position: absolute; }
+    .flow-node.mid { z-index: 2; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .node-icon { width: 20px; height: 20px; border-radius: 50%; background: #eee; }
+    .active-icon { background: #111; }
+    .node-line { height: 6px; border-radius: 4px; background: #f0f0f0; width: 60%; }
+    
+    /* Chart Widget */
+    .dash-widget { background: var(--ui-elem-bg); border: 1px solid var(--ui-elem-border); border-radius: 8px; width: 180px; padding: 12px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 40px; }
+    .bar { width: 16px; background: #eee; border-radius: 3px 3px 0 0; }
+    .bar:nth-child(2) { background: #111; height: 70%; }
+    .bar:nth-child(1) { height: 40%; } .bar:nth-child(3) { height: 50%; } .bar:nth-child(4) { height: 80%; } .bar:nth-child(5) { height: 60%; }
+
+    /* Night Mode overrides for UI */
+    body.night .node-icon, body.night .bar { background: #444; }
+    body.night .active-icon, body.night .bar:nth-child(2) { background: #fff; }
+
+    /* More Works Button Card */
+    .more-card { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 100px; background-color: var(--card-bg); color: var(--text-color); font-size: 13px; font-weight: 600; text-align: center; border: 1px solid var(--card-border); border-radius: 12px; gap: 6px; transition: background-color 0.2s; }
+    .more-card:hover { background-color: var(--bg-color); border-bottom: 1px solid var(--card-border); } 
+    /* ^ Fix to prevent border-bottom link underline on hover */
+
     /* JOB LIST & TOOLTIP */
     .job-list { position: relative; display: flex; flex-direction: column; }
     .hover-tooltip { position: absolute; left: -240px; width: 200px; background-color: var(--tooltip-bg); color: var(--tooltip-text); padding: 12px 16px; border-radius: 6px; font-size: 13px; line-height: 1.4; z-index: 10; opacity: 0; pointer-events: none; transform: translateY(-50%); transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -116,22 +185,33 @@
     .job-details h3 { font-size: 16px; font-weight: 400; margin: 0; }
     .job-details h4 { font-size: 14px; color: var(--secondary-text); font-weight: 400; margin: 4px 0 0 0; }
     .text-content-padding { padding-top: 6px; }
+
     .job-description-mobile { display: none; }
 
+    /* ANIMATIONS */
     .animated { animation-duration: 1s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
     .two { animation-delay: 0.5s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* MOBILE BREAKPOINT */
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 40px; }
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .hover-tooltip { display: none !important; }
+      
+      /* Mini Grid: 2x2 on Mobile */
+      .recent-work-grid { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; margin-bottom: 40px; }
+      
       .job-row { column-gap: 20px; margin-bottom: 0; padding-bottom: 24px; }
       .job-row::after { content: attr(data-tooltip); grid-column: 1 / -1; display: block; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5; }
-      .job-description-mobile { display: block; grid-column: 1 / -1; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5; }
+      
+      .job-description-mobile {
+        display: block; grid-column: 1 / -1; margin-top: 16px; padding-top: 16px;
+        border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5;
+      }
       .text-content-padding { padding-top: 0; }
     }
   </style>
@@ -139,6 +219,7 @@
 
 <body class="day">
 
+<!-- MOBILE OVERLAY -->
 <div class="mobile-overlay">
     <a href="/" class="mobile-link">Experience</a>
     <a href="/works/" class="mobile-link">Works</a>
@@ -152,7 +233,6 @@
     <a href="/" class="logo-circle"><img src="/images/profile-avatar.png" alt="Eugene Evgen"></a>
     
     <nav class="nav-links">
-      <!-- Clean URLs in href -->
       <a href="/" class="text-link" style="opacity: 0.5; cursor: default;">Experience</a>
       <a href="/works/" class="text-link">Works</a>
       <a href="/contact/" class="text-link">Contact</a>
@@ -172,6 +252,7 @@
     <div class="content-col">
       <h1>Hi, I'm Eugene — AI-Driven Product Designer.</h1>
 
+      <!-- NEW BADGES -->
       <div class="badge-row">
         <span class="badge">V0</span>
         <span class="badge">Figma Make</span>
@@ -190,15 +271,60 @@
           <a href="https://www.gocanopy.tech/" target="_blank">GoCanopy</a> for the last 
           <span id="counter">...</span>.
         </p>
+
         <p>
           My research-powered prototype for our real estate investing platform helped us land a Fortune 500 client and shape new AI capabilities - analytical, forecasting, agentic, generative, and conversational.
         </p>
+
         <p>
           I live in Porto, Portugal. You can keep up with me on 
           <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a> or 
           <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.
         </p>
-        <div class="spacer48"></div>
+      </div>
+
+      <!-- NEW SECTION: 4 CARDS IN 1 ROW -->
+      <div class="recent-work-grid">
+          <!-- 1. Investment Platform -->
+          <a href="/ai-investment-platform/" class="mini-card" title="AI Investment Platform">
+              <div class="mini-visual">
+                  <img src="/images/gocanopy-01.png" alt="AI Platform" class="mini-img">
+              </div>
+          </a>
+
+          <!-- 2. Chatbot Builder -->
+          <a href="/ai-chatbot-builder/" class="mini-card" title="AI Chatbot Builder">
+              <div class="mini-visual">
+                  <div class="ui-scale-wrapper">
+                      <div class="flow-node mid">
+                          <div class="node-icon active-icon"></div>
+                          <div class="node-line"></div>
+                      </div>
+                  </div>
+              </div>
+          </a>
+
+          <!-- 3. Forecasting -->
+          <a href="/real-estate-forecasting/" class="mini-card" title="Real Estate Forecasting">
+              <div class="mini-visual">
+                  <div class="ui-scale-wrapper">
+                      <div class="dash-widget">
+                          <div style="display: flex; gap: 8px; align-items: center;">
+                             <div class="node-icon active-icon" style="width: 14px; height: 14px;"></div>
+                             <div class="node-line" style="width: 50%;"></div>
+                          </div>
+                          <div class="chart-bars">
+                              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </a>
+
+          <!-- 4. More Works Button -->
+          <a href="/works/" class="more-card">
+              More works →
+          </a>
       </div>
 
       <h4 class="label">PREVIOUSLY</h4> 
@@ -228,7 +354,7 @@
                 <h4>2017-2021</h4>
             </div>
             <div class="job-description-mobile">
-                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
+                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
             </div>
           </div> 
       </div>
@@ -257,6 +383,7 @@
 </div>
 
 <script>
+  // 1. Theme Logic
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -271,6 +398,7 @@
       }
   });
 
+  // 2. Mobile Menu Logic
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const overlay = document.querySelector('.mobile-overlay');
   let isMenuOpen = false;
@@ -288,6 +416,7 @@
       }
   });
 
+  // 3. Counter
   var startDate = new Date("Sep 4, 2024 09:00:00").getTime();
   setInterval(function() {
       var now = new Date().getTime();
@@ -296,9 +425,10 @@
       document.getElementById("counter").innerHTML = days + " days";
   }, 1000);
 
+  // 4. Tooltip & Links Injection (Desktop Only)
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
-  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
+  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
       const isXebia = element.querySelector('h2 a').href.includes('xebia');
