@@ -140,7 +140,8 @@
         font-weight: 600;
         font-size: 14px;
         padding: 12px;
-        border-radius: 10px;
+        /* CHANGE: Capsule shape */
+        border-radius: 100px;
         border: 1px solid transparent;
         cursor: pointer;
         margin-top: 8px;
@@ -152,6 +153,15 @@
     }
     button[type="submit"]:active {
         transform: translateY(0);
+    }
+
+    /* CHANGE: Styles for the text under button */
+    .form-note {
+        font-size: 13px;
+        color: var(--secondary-text);
+        text-align: center;
+        margin: 0;
+        margin-top: 4px;
     }
 
     @media (max-width: 768px) {
@@ -203,16 +213,23 @@
            <div class="select-wrapper">
                <select name="subject" required>
                    <option value="" disabled selected>What is this about?</option>
-                   <option value="Project">App/Web Project</option>
-                   <option value="Job">Full-time Opportunity</option>
-                   <option value="Collab">Collaboration</option>
-                   <option value="Other">Something Else</option>
+                   <!-- CHANGE: Updated Options -->
+                   <option value="MVP">New product / MVP</option>
+                   <option value="Redesign">Redesign or optimization</option>
+                   <option value="Research">UX research & validation</option>
+                   <option value="SaaS">Scaling an existing SaaS</option>
+                   <option value="AI">AI-powered product or workflow</option>
+                   <option value="NotSure">Not sure yet</option>
                </select>
            </div>
            
-           <textarea name="message" placeholder="Type your message here" required></textarea>
+           <!-- CHANGE: Updated Placeholder -->
+           <textarea name="message" placeholder="Tell me about your product, goals, or challenges… where do you need help right now?" required></textarea>
            
            <button type="submit">Send it</button>
+           
+           <!-- CHANGE: Text under button -->
+           <p class="form-note">No pressure — just a quick conversation to see if we’re a good fit.</p>
        </form>
 
     </div>
