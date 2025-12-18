@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <title>Works - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" sizes="any">
-  <link rel="icon" href="images/icon-192.png" type="image/png">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
     /* VARIABLES */
@@ -52,7 +52,6 @@
     .content-grid { display: grid; grid-template-columns: var(--sidebar-width) 1fr; width: 100%; }
     .icon-col { padding-top: 5px; }
     
-    /* THEME TOGGLE */
     .theme-toggle { width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; margin-left: 22px; }
     .theme-toggle svg { width: 24px; height: 24px; display: block; }
     body.day .icon-moon { display: block !important; fill: #333; }
@@ -61,125 +60,29 @@
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
     /* --- WORK CARD STYLES --- */
-    
-    .cards-container {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-        width: 100%; /* Ensure container takes full width */
-    }
+    .cards-container { display: flex; flex-direction: column; gap: 32px; width: 100%; }
+    .work-card { display: block; background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; text-decoration: none; color: var(--text-color); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; position: relative; width: 100%; }
+    .work-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); border-color: rgba(120, 120, 120, 0.3); }
 
-    .work-card {
-        display: block;
-        background-color: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: 12px;
-        overflow: hidden;
-        text-decoration: none;
-        color: var(--text-color);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        position: relative;
-        width: 100%;
-    }
+    .card-visual { height: 240px; width: 100%; position: relative; background-color: var(--bg-color); background-image: radial-gradient(var(--pattern-dot) 1.5px, transparent 1.5px); background-size: 24px 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--card-border); }
+    .card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .work-card:hover .card-img { transform: scale(1.03); }
 
-    .work-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-        border-color: rgba(120, 120, 120, 0.3);
-    }
+    .card-badge { position: absolute; top: 12px; right: 12px; background-color: var(--btn-bg); color: var(--btn-text); font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    body.night .card-badge { background-color: #54D1FF; color: #000; }
 
-    /* Card Visual Area (Top) */
-    .card-visual {
-        height: 240px;
-        width: 100%;
-        position: relative;
-        background-color: var(--bg-color); 
-        background-image: radial-gradient(var(--pattern-dot) 1.5px, transparent 1.5px);
-        background-size: 24px 24px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid var(--card-border);
-    }
-    
-    /* Image inside Card */
-    .card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.5s ease;
-    }
-    .work-card:hover .card-img {
-        transform: scale(1.03);
-    }
+    .ui-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform 0.4s ease; }
+    .work-card:hover .ui-wrapper { transform: scale(1.02); }
 
-    /* Badge Style */
-    .card-badge {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        font-size: 11px;
-        font-weight: 600;
-        padding: 5px 10px;
-        border-radius: 100px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        z-index: 10;
-        letter-spacing: 0.02em;
-        transition: background-color 0.3s, color 0.3s;
-    }
-    
-    /* Dark Mode specific badge color */
-    body.night .card-badge {
-        background-color: #54D1FF;
-        color: #000;
-    }
-
-    /* Floating UI Elements (CSS Mockups) */
-    .ui-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.4s ease;
-    }
-    
-    .work-card:hover .ui-wrapper {
-        transform: scale(1.02);
-    }
-
-    /* Style 1: Chatbot Flow */
-    .flow-node {
-        background: var(--ui-elem-bg);
-        border: 1px solid var(--ui-elem-border);
-        padding: 12px 16px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 260px;
-        max-width: 90%; /* Prevent overflow on small screens */
-        position: absolute;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
+    .flow-node { background: var(--ui-elem-bg); border: 1px solid var(--ui-elem-border); padding: 12px 16px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 10px; width: 260px; max-width: 90%; position: absolute; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .flow-node.top { top: 20%; opacity: 0.6; transform: scale(0.9); }
     .flow-node.mid { top: 44%; z-index: 2; border: 1px solid rgba(0,0,0,0.1); }
     .flow-node.bot { top: 72%; opacity: 0.6; transform: scale(0.9); }
-
     .node-icon { width: 24px; height: 24px; border-radius: 50%; background: #eee; flex-shrink: 0; }
     .active-icon { background: #111; }
     .node-lines { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
     .node-line { height: 6px; border-radius: 4px; background: #f0f0f0; width: 60%; }
     .node-line.short { width: 40%; }
-    
     body.night .node-line { background: #444; }
     body.night .node-icon { background: #444; }
     body.night .active-icon { background: #fff; }
@@ -188,19 +91,9 @@
     .work-card:hover .flow-node.bot { top: 76%; opacity: 0.4; }
     .work-card:hover .flow-node.mid { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
 
-    /* Style 2: Analytics/Dashboard */
-    .dash-widget {
-        background: var(--ui-elem-bg);
-        border: 1px solid var(--ui-elem-border);
-        border-radius: 8px;
-        position: absolute;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        padding: 14px;
-        box-sizing: border-box; /* Fix for padding increasing width */
-    }
+    .dash-widget { background: var(--ui-elem-bg); border: 1px solid var(--ui-elem-border); border-radius: 8px; position: absolute; box-shadow: 0 4px 12px rgba(0,0,0,0.05); padding: 14px; box-sizing: border-box; }
     .widget-main { width: 280px; max-width: 90%; height: 140px; top: 50%; transform: translateY(-50%); z-index: 2; display: flex; flex-direction: column; justify-content: space-between; }
     .widget-sub { width: 240px; max-width: 80%; height: 100px; top: 15px; left: 50%; transform: translateX(-50%) scale(0.9); opacity: 0.5; z-index: 1; }
-    
     .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 60px; }
     .bar { width: 20px; background: #eee; border-radius: 4px 4px 0 0; transition: height 0.4s ease; }
     .bar:nth-child(1) { height: 40%; }
@@ -208,21 +101,18 @@
     .bar:nth-child(3) { height: 50%; }
     .bar:nth-child(4) { height: 80%; }
     .bar:nth-child(5) { height: 60%; }
-    
     body.night .bar { background: #444; }
     body.night .bar:nth-child(2) { background: #fff; }
 
     .work-card:hover .widget-sub { top: 5px; opacity: 0.3; }
     .work-card:hover .bar:nth-child(2) { height: 90%; }
 
-    /* Card Text Content (Bottom) */
     .card-content { padding: 24px; }
     .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
     .card-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--secondary-text); }
     .card-content h2 { font-size: 18px; font-weight: 700; margin: 4px 0 8px 0; color: var(--text-color); }
     .card-content p { font-size: 15px; color: var(--secondary-text); margin: 0; line-height: 1.5; max-width: 100%; }
 
-    /* Animation */
     .animated { animation-duration: 1s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
     .two { animation-delay: 0.5s; }
@@ -233,31 +123,28 @@
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .icon-col { margin-bottom: 40px; }
-      
       .card-visual { height: 200px; }
-      /* Ensure text doesn't overflow */
       .card-content h2, .card-content p { word-wrap: break-word; }
     }
   </style>
 </head>
 <body class="day">
 
-<!-- MOBILE OVERLAY -->
 <div class="mobile-overlay">
     <a href="/" class="mobile-link">Experience</a>
-    <a href="works.html" class="mobile-link">Works</a>
-    <a href="contact.html" class="mobile-link">Contact</a>
-    <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
+    <a href="/works/" class="mobile-link">Works</a>
+    <a href="/contact/" class="mobile-link">Contact</a>
+    <a href="/Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv mobile-btn-cv" target="_blank">Download CV</a>
 </div>
 
 <div class="container">
   <header class="main-header">
-    <a href="/" class="logo-circle"><img src="images/profile-avatar.png" alt="Eugene Evgen"></a>
+    <a href="/" class="logo-circle"><img src="/images/profile-avatar.png" alt="Eugene Evgen"></a>
     <nav class="nav-links">
       <a href="/" class="text-link">Experience</a>
-      <a href="works.html" class="text-link" style="opacity: 0.5; cursor: default;">Works</a>
-      <a href="contact.html" class="text-link">Contact</a>
-      <a href="Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
+      <a href="/works/" class="text-link" style="opacity: 0.5; cursor: default;">Works</a>
+      <a href="/contact/" class="text-link">Contact</a>
+      <a href="/Eugene Evgen CV - Senior Product Designer.pdf" class="btn-cv" target="_blank">Download CV</a>
     </nav>
     <div class="mobile-menu-btn">Menu</div>
   </header>
@@ -274,11 +161,11 @@
        
        <div class="cards-container">
            
-           <!-- PROJECT 3: AI Investment Platform (NEW - With Image) -->
-           <a href="ai-investment-platform.html" class="work-card">
+           <!-- Links updated to Folder Structure -->
+           <a href="/ai-investment-platform/" class="work-card">
                <div class="card-visual">
                    <div class="card-badge">Won Fortune 500 client</div>
-                   <img src="images/gocanopy-01.png" alt="AI Investment Platform" class="card-img">
+                   <img src="/images/gocanopy-01.png" alt="AI Investment Platform" class="card-img">
                </div>
                <div class="card-content">
                    <div class="card-meta">
@@ -289,11 +176,9 @@
                </div>
            </a>
 
-           <!-- PROJECT 1: AI Chatbot Builder -->
-           <a href="ai-chatbot-builder.html" class="work-card">
+           <a href="/ai-chatbot-builder/" class="work-card">
                <div class="card-visual">
                    <div class="ui-wrapper">
-                       <!-- CSS-Only Mockup of a Flow -->
                        <div class="flow-node top">
                            <div class="node-icon"></div>
                            <div class="node-lines"><div class="node-line"></div></div>
@@ -320,11 +205,9 @@
                </div>
            </a>
 
-           <!-- PROJECT 2: Analytics / Forecasting -->
-           <a href="real-estate-forecasting.html" class="work-card">
+           <a href="/real-estate-forecasting/" class="work-card">
                 <div class="card-visual">
                     <div class="ui-wrapper">
-                        <!-- CSS-Only Mockup of Dashboard -->
                         <div class="dash-widget widget-sub"></div>
                         <div class="dash-widget widget-main">
                              <div style="display: flex; gap: 8px; align-items: center;">
@@ -357,7 +240,6 @@
 </div>
 
 <script>
-  // Shared Script
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
@@ -372,7 +254,6 @@
       }
   });
 
-  // Mobile Menu Logic
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const overlay = document.querySelector('.mobile-overlay');
   let isMenuOpen = false;
