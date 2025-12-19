@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AI Investment Platform - Eugene Evgen</title>
+  <title>AI Web Demo Redesign - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" sizes="any">
-  <link rel="icon" href="images/icon-192.png" type="image/png">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* --- CORE VARIABLES --- */
+    /* VARIABLES */
     :root {
       --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
       --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
@@ -16,7 +16,6 @@
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --container-width: 800px; --sidebar-width: 220px; --top-spacing: 40px; --bottom-spacing: 140px;
       
-      /* Case Study Specific */
       --meta-label: #888;
       --image-bg: #e0e0e0;
       --code-bg: #fff;
@@ -36,7 +35,7 @@
     * { box-sizing: border-box; }
     body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
 
-    /* --- HEADER (Standard) --- */
+    /* HEADER */
     .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
     .logo-circle { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0; transition: transform 0.2s ease; display: block; }
     .logo-circle:hover { transform: scale(1.05); }
@@ -44,22 +43,13 @@
     
     .nav-links { display: flex; align-items: center; gap: 24px; padding-right: 4px; }
 
-    /* BACK BUTTON STYLE */
-    .btn-back { 
-        display: flex; align-items: center; gap: 8px;
-        background-color: transparent; 
-        color: var(--text-color) !important; 
-        padding: 10px 16px; border-radius: 100px; 
-        font-weight: 500; font-size: 15px; text-decoration: none; 
-        transition: background-color 0.2s ease, opacity 0.2s ease; 
-    }
+    /* BACK BUTTON (Links to /works/) */
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 16px; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: background-color 0.2s ease, opacity 0.2s ease; }
     .btn-back:hover { background-color: rgba(0,0,0,0.05); }
     body.night .btn-back:hover { background-color: rgba(255,255,255,0.1); }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
 
-    /* MOBILE MENU (Hidden) */
     .mobile-menu-btn { display: none; }
-    .mobile-overlay { display: none; }
 
     /* LAYOUT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
@@ -72,178 +62,55 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    /* --- CASE STUDY STYLES --- */
-    
-    .case-tag {
-        font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
-        font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block;
-    }
+    /* CASE STUDY STYLES */
+    .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
 
     h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
-    /* Hero Image & Badge */
-    .hero-image {
-        width: 100%; height: auto;
-        background-color: var(--image-bg);
-        border-radius: 12px;
-        margin-bottom: 32px;
-        border: 1px solid var(--divider-color);
-        overflow: hidden;
-        position: relative; 
-    }
+    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
     .hero-image img { width: 100%; height: auto; display: block; }
 
-    .hero-badge {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        font-size: 12px;
-        font-weight: 600;
-        padding: 6px 12px;
-        border-radius: 100px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        z-index: 10;
-        letter-spacing: 0.02em;
-        transition: background-color 0.3s, color 0.3s;
-    }
+    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: var(--btn-bg); color: var(--btn-text); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
     body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
-    /* Big Text Slide */
-    .text-slide {
-        background-color: var(--slide-bg);
-        color: var(--slide-text);
-        padding: 60px 40px;
-        border-radius: 12px;
-        font-size: 24px;
-        font-weight: 500;
-        text-align: center;
-        line-height: 1.4;
-        margin: 0 0 80px 0;
-        transition: background-color 0.3s, color 0.3s;
-    }
-    .text-slide.secondary {
-        /* Variation for the second slide */
-        font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px;
-    }
+    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
+    .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
 
-    /* --- REVISED DETAILS LAYOUT --- */
-    .project-details-wrapper {
-        margin-bottom: 80px;
-    }
+    .project-details-wrapper { margin-bottom: 80px; }
+    .detail-block { margin-bottom: 40px; }
+    .detail-block.last-top { padding-bottom: 40px; border-bottom: 1px solid var(--divider-color); margin-bottom: 40px; }
 
-    .detail-block {
-        margin-bottom: 40px;
-    }
-
-    /* Divider after Timeframe */
-    .detail-block.last-top {
-        padding-bottom: 40px;
-        border-bottom: 1px solid var(--divider-color);
-        margin-bottom: 40px;
-    }
-
-    /* 2 Column Grid for Bottom Section */
-    .split-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        align-items: start;
-    }
-
-    .section-label { 
-        font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; 
-        color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; 
-    }
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
     
-    /* Highlight Text for Task & Timeframe */
-    .text-highlight {
-        font-size: 20px;
-        color: var(--text-color);
-        font-weight: 700;
-        line-height: 1.5;
-        margin: 0;
-        max-width: 680px; /* Keep line length readable */
-    }
+    .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
 
-    /* Lists */
     .detail-list { list-style: none; padding: 0; margin: 0; }
-    .detail-list li { 
-        font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; 
-        position: relative; padding-left: 18px; line-height: 1.6;
-    }
-    .detail-list li::before {
-        content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold;
-    }
+    .detail-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 18px; line-height: 1.6; }
+    .detail-list li::before { content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold; }
     
-    /* Numbered list for Results */
     .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
-    .numbered-list li {
-        font-size: 16px; color: var(--secondary-text); margin-bottom: 12px;
-        position: relative; padding-left: 20px; line-height: 1.6;
-    }
-    .numbered-list li::before {
-        counter-increment: result-counter;
-        content: counter(result-counter) ".";
-        position: absolute; left: 0; color: var(--secondary-text); font-weight: 500;
-    }
+    .numbered-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.6; }
+    .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
 
-    /* Process Section */
-    .process-header {
-        font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; 
-        color: var(--secondary-text); font-weight: 600; 
-        margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px;
-    }
+    .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
     
     .process-step { margin-bottom: 60px; }
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
-    .media-block {
-        width: 100%;
-        background-color: var(--image-bg);
-        border-radius: 8px;
-        overflow: hidden;
-        margin: 24px 0;
-        border: 1px solid var(--divider-color);
-        display: flex; align-items: center; justify-content: center;
-        min-height: 240px;
-    }
+    .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
     .media-block img { width: 100%; height: auto; display: block; }
     .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
     
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
-    /* Footer Contact CTA - Updated */
     .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
-    
-    .footer-title {
-        font-size: 32px; font-weight: 700; line-height: 1.2;
-        color: var(--text-color); margin: 0 0 16px 0;
-    }
-    .footer-subtitle {
-        font-size: 16px; color: var(--secondary-text);
-        max-width: 620px; margin: 0 auto 32px auto;
-        line-height: 1.6;
-    }
+    .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
+    .footer-subtitle { font-size: 16px; color: var(--secondary-text); max-width: 620px; margin: 0 auto 32px auto; line-height: 1.6; }
 
-    .btn-contact {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 42px; /* Fixed height matching top bar buttons */
-        padding: 0 24px;
-        background-color: var(--btn-bg);
-        color: var(--btn-text);
-        border-radius: 100px;
-        font-weight: 500;
-        font-size: 15px;
-        text-decoration: none;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-    }
+    .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
     .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
 
-    /* Animations */
     .animated { animation-duration: 0.8s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -256,9 +123,7 @@
       h1 { font-size: 28px; }
       .footer-title { font-size: 28px; }
       .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
-      .media-block {
-          min-height: auto; 
-      }
+      .media-block { min-height: auto; }
     }
   </style>
 </head>
@@ -266,11 +131,10 @@
 
 <div class="container">
   <header class="main-header">
-    <a href="/" class="logo-circle"><img src="images/profile-avatar.png" alt="Eugene Evgen"></a>
+    <a href="/" class="logo-circle"><img src="/images/profile-avatar.png" alt="Eugene Evgen"></a>
     
-    <!-- "Back to works" (Secondary Style) -->
     <div class="nav-links">
-        <a href="works.html" class="btn-back">
+        <a href="/works/" class="btn-back">
             <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Back to works
         </a>
@@ -288,117 +152,118 @@
     <div class="content-col">
 
        <span class="case-tag">AI INTERACTION DESIGN</span>
-       <h1>Empowering enterprise investment teams to scale portfolio decisions with AI</h1>
+       <h1>Transforming a neglected AI web demo into a vital sales tool for a Computer Vision startup</h1>
        
        <div class="hero-image">
-           <div class="hero-badge">Won Fortune 500 client</div>
-           <img src="images/gocanopy-01.png" alt="GoCanopy Investment Platform Interface">
+           <div class="hero-badge">Increased Sales Usage to 100%</div>
+           <!-- Placeholder for your hero image -->
+           <img src="/images/mobius-01.png" alt="Mobius Labs SDK Web Demo Interface">
        </div>
 
-       <!-- Problem Statement Slide -->
        <div class="text-slide">
-           Real estate investment teams lose time and decision quality due to highly fragmented, inconsistent data scattered across drives, inboxes, PDFs, spreadsheets, and manual processes.
+           Despite having powerful computer vision technology, the company’s public web demo was confusing and feature-heavy, causing users to abandon it within 30 seconds.
        </div>
 
-       <!-- Project Details Wrapper -->
        <div class="project-details-wrapper">
            
-           <!-- Block 1: My Task -->
            <div class="detail-block">
                <h4 class="section-label">MY TASK</h4>
                <p class="text-highlight">
-                   Leaded the design of MVP Asset Management experience for an enterprise client presentation, unifying fragmented real estate data into a single, decision-ready workflow and integrate it into existing investment platform.
+                   Led the comprehensive redesign of the Mobius Labs SDK web demo to align with specific industry needs. I bridged the gap between Product and Sales by defining industry personas, creating a scalable design system, and building interactive prototypes that the sales team could actually use to pitch clients.
                </p>
            </div>
 
-           <!-- Block 2: Timeframe (Separated by Divider) -->
            <div class="detail-block last-top">
                <h4 class="section-label">TASK TIMEFRAME</h4>
-               <p class="text-highlight">2 months</p>
+               <p class="text-highlight">5 months</p>
            </div>
 
-           <!-- Block 3: Split Grid (Focus & Results) -->
            <div class="split-grid">
                <div>
                    <h4 class="section-label">KEY FOCUS AREAS</h4>
                    <ul class="detail-list">
-                       <li>User research, workflow analysis, and problem framing</li>
-                       <li>End-to-end UX & UI design (clickable Figma prototype)</li>
-                       <li>AI-assisted insight design & data visualization</li>
-                       <li>Stakeholder presentations & alignment</li>
+                       <li>Internal UX auditing & "New Hire" usability testing</li>
+                       <li>Sales team interviews & Industry Persona definition</li>
+                       <li>Design System creation (MUI + Figma + Storybook)</li>
+                       <li>High-fidelity prototyping</li>
                    </ul>
                </div>
                <div>
                    <h4 class="section-label">RESULTS</h4>
                    <ul class="numbered-list">
-                       <li>Helped secure a Fortune 500 enterprise client partnership</li>
-                       <li>Reduced manual reporting effort by ~60% by centralizing portfolio data into a single workflow</li>
-                       <li>Improved decision turnaround time by 2-3x with real-time portfolio visibility</li>
+                       <li>Increased demo usage in sales meetings by 95%</li>
+                       <li>Accelerated design production speed by implementing a unified MUI-based Design System</li>
+                       <li>Established a "new hire testing loop" agreement with HR to secure continuous, free user feedback</li>
                    </ul>
                </div>
            </div>
 
        </div>
 
-       <!-- Big Text Slide 2 -->
        <div class="text-slide secondary">
-           My Figma prototype helped win a Fortune 500 enterprise client deal
+           The new tool provided the credibility needed to transition prospects into Proof of Concepts.
        </div>
 
        <div class="media-block">
-            <img src="images/gocanopy-02.png" alt="Prototype Screen">
+            <!-- Placeholder for a high impact visual/prototype screen -->
+            <img src="/images/mobius-02.png" alt="Mobius Redesigned Interface">
        </div>
        <p class="nda-note">NDA-protected project - business-sensitive details omitted. Full story with deeper insights available upon request.</p>
 
        <h4 class="process-header">OVERVIEW OF MY DESIGN PROCESS</h4>
 
        <div class="process-step">
-           <h3>Step 1 - Countless collaborative sessions with the CEO and CTO:</h3>
+           <h3>Step 1 - Internal UX review workshop:</h3>
+           <p>Conducted "labor illusion" experiments and usability tests with new employees during my first two weeks, identifying that users were overwhelmed by technical jargon and confusing onboarding.</p>
            <div class="media-block">
-               <img src="images/gocanopy-03.png" alt="Collaboration Session">
+               <img src="/images/mobius-03.png" alt="UX Workshop and Analysis">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 2 - Analysis of meeting transcripts and research data using Google AI Studio:</h3>
+           <h3>Step 2 - Sales team interviews & deal analysis:</h3>
+           <p>Interviewed 4 experts most involved in sales process (sales specialists, CEO and tech lead) and analyzed 30+ HubSpot deals to understand the disconnect. Discovered that while the product demo sold "features," clients were buying "solutions" specific to their industry.</p>
            <div class="media-block">
-               <img src="images/gocanopy-04.png" alt="AI Research Analysis">
+               <img src="/images/mobius-04.png" alt="HubSpot Deal Analysis">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 3 - Capturing early insights and requirements in FigJam:</h3>
+           <h3>Step 3 - Defining industry personas:</h3>
+           <p>Synthesized research into 4 key industry personas (Content Licensing, Internet-to-Print, Broadcasting, Marketing) to ensure the new design spoke the language of the decision-makers, not just developers.</p>
            <div class="media-block">
-               <img src="images/gocanopy-05.png" alt="FigJam Insights">
+               <img src="/images/mobius-05.png" alt="Industry Personas">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 4 - Early idea explorations for implementation approaches, using V0.dev and Claude:</h3>
+           <h3>Step 4 - Building the infrastructure:</h3>
+           <p>Created a comprehensive Design System (Figma library with MUI-based components linked to Storybook) to eliminate messy custom add-ons and inconsistent fonts, streamlining the implementation process.</p>
            <div class="media-block">
-               <img src="images/gocanopy-06.png" alt="AI Prototyping Explorations">
+               <img src="/images/mobius-06.png" alt="Design System & Storybook">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 5 - Figma design stages overview (excluding the design system library and clickable prototype):</h3>
+           <h3>Step 5 - Strategic redesign & vertical prototyping:</h3>
+           <p>Executed the “industry-oriented” redesign with improved contrast and clear, step-by-step processes.</p>
            <div class="media-block">
-               <img src="images/gocanopy-07.png" alt="Figma Design Overview">
+               <img src="/images/mobius-07.png" alt="Redesign Prototypes">
            </div>
        </div>
 
        <div class="process-step">
-           <h3>Step 6 - User feedback, refinement, and implementation support (preview of design snippets).</h3>
+           <h3>Step 6 - Implementation & sales feedback:</h3>
+           <p>Launched the redesigned demo and gathered feedback 12 months later, confirming the tool now provides the necessary credibility to transition prospects into Proof of Concepts (POCs).</p>
            <div class="media-block">
-               <img src="images/gocanopy-08.png" alt="Implementation Support">
+               <img src="/images/mobius-08.png" alt="Final Implementation">
            </div>
        </div>
 
-       <!-- Updated Footer CTA -->
        <div class="footer-cta">
            <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
            <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
-           <a href="contact.html" class="btn-contact">Let’s design your product</a>
+           <a href="/contact/" class="btn-contact">Let’s design your product</a>
        </div>
 
     </div>
@@ -406,7 +271,6 @@
 </div>
 
 <script>
-  // Shared Script
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
