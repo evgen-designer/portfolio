@@ -100,6 +100,18 @@
 
     h1 { font-size: 20px; font-weight: 700; margin-bottom: 24px; margin-top: 0; line-height: 1.3; }
 
+    /* --- SUBTITLE STYLE --- */
+    p.intro-subtitle {
+      font-family: var(--font-family); /* Same as header */
+      font-size: 16px; 
+      color: var(--secondary-text);
+      font-weight: 400; /* Regular weight */
+      margin-top: -16px; /* Spacing relative to H1 */
+      margin-bottom: 32px;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+
     /* BADGES */
     .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
     .badge { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; border: 1px solid var(--divider-color); color: var(--secondary-text); background: transparent; white-space: nowrap; }
@@ -241,6 +253,9 @@
         border-top: 1px solid var(--divider-color); font-size: 14px; color: var(--secondary-text); line-height: 1.5;
       }
       .text-content-padding { padding-top: 0; }
+
+      /* Mobile adjustment for subtitle */
+      p.intro-subtitle { font-size: 15px; margin-top: -12px; }
     }
   </style>
 </head>
@@ -279,20 +294,15 @@
     </div>
 
     <div class="content-col">
-      <h1>Hi, I'm Eugene — AI-Driven Product Designer.</h1>
+      <!-- 1. HEADER -->
+      <h1>Hi, I'm Eugene — Lead Product Designer for AI-driven fintech & proptech SaaS.</h1>
+      
+      <!-- 2. SUBHEADER (Moved here, updated text) -->
+      <p class="intro-subtitle">
+          I ship 3-5x faster by structuring research with AI and building vibe-coded, testable prototypes.
+      </p>
 
-      <div class="badge-row">
-        <span class="badge">V0</span>
-        <span class="badge">Figma Make</span>
-        <span class="badge">Cursor</span>
-        <span class="badge">Claude</span>
-        <span class="badge">Nano Banana</span>
-        <span class="badge">Gemini Pro</span>
-        <span class="badge">Veo</span>
-        <span class="badge">GPT</span>
-        <span class="badge">Sora</span>
-      </div>
-
+      <!-- 3. TEXT PARAGRAPHS (Moved up, before badges) -->
       <div>
         <p>
           Some people call me Evgen. I’ve been designing and vibe-coding at 
@@ -309,6 +319,19 @@
           <a href="https://www.threads.com/@bucklajean" target="_blank">Threads</a> or 
           <a href="https://www.linkedin.com/in/evgen-designer/" target="_blank">LinkedIn</a>.
         </p>
+      </div>
+
+      <!-- 4. BADGES (Moved down, after text) -->
+      <div class="badge-row">
+        <span class="badge">V0</span>
+        <span class="badge">Figma Make</span>
+        <span class="badge">Cursor</span>
+        <span class="badge">Claude</span>
+        <span class="badge">Nano Banana</span>
+        <span class="badge">Gemini Pro</span>
+        <span class="badge">Veo</span>
+        <span class="badge">GPT</span>
+        <span class="badge">Sora</span>
       </div>
     </div>
   </div> 
@@ -390,7 +413,7 @@
                 <h4>2017-2021</h4>
             </div>
             <div class="job-description-mobile">
-                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
+                Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>
             </div>
           </div> 
       </div>
@@ -464,7 +487,7 @@
   // 4. Tooltip & Links Injection (Desktop Only)
   const jobRows = document.querySelectorAll('.job-row');
   const tooltip = document.getElementById('hover-tooltip');
-  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
+  const xebiaLinks = `Design for enterprises like <a href="https://www.cargobull.com/en/services/data-services/apps?_gl=1*1j1yklq*_up*MQ..*_ga*NTkxMDI2MjcyLjE3NjU0Njg2NDg.*_ga_6TDN7NK6TT*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw*_ga_HQPW17E0SM*czE3NjU0Njg2NDYkbzEkZzEkdDE3NjU0Njg2NTMkajUzJGwwJGgw" target="_blank">Schmitz Cargobull</a>, <a href="https://www.knightfrank.com/" target="_blank">Knight Frank</a>, <a href="https://www.adnoc.ae/" target="_blank">ADNOC</a>, <a href="https://www.volotea.com/en/" target="_blank">Volotea</a>, <a href="https://www.bcgplatinion.com/" target="_blank">Boston Consulting Group</a>`;
 
   function updateTooltip(element) {
       const isXebia = element.querySelector('h2 a').href.includes('xebia');
