@@ -99,7 +99,12 @@
     .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
 
     .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
-    .media-block img { width: 100%; height: auto; display: block; }
+    
+    /* Support for Images, Local Video, and Youtube Iframes */
+    .media-block img, 
+    .media-block video { width: 100%; height: auto; display: block; }
+    .media-block iframe { width: 100%; aspect-ratio: 16 / 9; display: block; border: 0; }
+    
     .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
     
     .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
@@ -251,13 +256,10 @@
            <div class="media-block">
                <img src="/images/mobius-07.png" alt="Redesign Prototypes">
            </div>
-       </div>
-
-       <div class="process-step">
-           <h3>Step 6 - Implementation & sales feedback:</h3>
-           <p>Launched the redesigned demo and gathered feedback 12 months later, confirming the tool now provides the necessary credibility to transition prospects into Proof of Concepts (POCs).</p>
+           
+           <!-- Added YouTube Video Embed with your ID -->
            <div class="media-block">
-               <img src="/images/mobius-08.png" alt="Final Implementation">
+               <iframe src="https://www.youtube.com/embed/JjPqlSbk6qo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
            </div>
        </div>
 
