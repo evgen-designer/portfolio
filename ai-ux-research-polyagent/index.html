@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>AI Chatbot Builder - Eugene Evgen</title>
+  <title>AI UX Research - Eugene Evgen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" sizes="any">
-  <link rel="icon" href="images/icon-192.png" type="image/png">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/icon-192.png" type="image/png">
   
   <style>
-    /* --- CORE VARIABLES (Inherited) --- */
+    /* VARIABLES */
     :root {
       --bg-color: #F6F6F6; --text-color: #111; --secondary-text: #777; --link-color: #111; --divider-color: #e5e5e5;
       --header-bg: rgba(255, 255, 255, 0.6); --header-border: rgba(0, 0, 0, 0.05);
@@ -16,10 +16,11 @@
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --container-width: 800px; --sidebar-width: 220px; --top-spacing: 40px; --bottom-spacing: 140px;
       
-      /* Case Study Specific */
       --meta-label: #888;
       --image-bg: #e0e0e0;
       --code-bg: #fff;
+      --slide-bg: #111;
+      --slide-text: #fff;
     }
     body.night {
       --bg-color: #1a1a1a; --text-color: #f0f0f0; --secondary-text: #a0a0a0; --link-color: #fff; --divider-color: #333;
@@ -28,11 +29,13 @@
       --meta-label: #666;
       --image-bg: #2a2a2a;
       --code-bg: #222;
+      --slide-bg: #fff;
+      --slide-text: #000;
     }
     * { box-sizing: border-box; }
     body { margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-family); font-size: 16px; line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; }
 
-    /* --- HEADER (Standard) --- */
+    /* HEADER */
     .main-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; margin-bottom: 60px; background-color: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 100px; border: 1px solid var(--header-border); width: 100%; position: relative; z-index: 1001; }
     .logo-circle { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0; transition: transform 0.2s ease; display: block; }
     .logo-circle:hover { transform: scale(1.05); }
@@ -40,22 +43,13 @@
     
     .nav-links { display: flex; align-items: center; gap: 24px; padding-right: 4px; }
 
-    /* BACK BUTTON STYLE (Secondary/Ghost) */
-    .btn-back { 
-        display: flex; align-items: center; gap: 8px;
-        background-color: transparent; 
-        color: var(--text-color) !important; 
-        padding: 10px 16px; border-radius: 100px; 
-        font-weight: 500; font-size: 15px; text-decoration: none; 
-        transition: background-color 0.2s ease, opacity 0.2s ease; 
-    }
-    .btn-back:hover { 
-        background-color: rgba(0,0,0,0.05); 
-    }
-    body.night .btn-back:hover {
-        background-color: rgba(255,255,255,0.1);
-    }
+    /* BACK BUTTON (Links to /works/) */
+    .btn-back { display: flex; align-items: center; gap: 8px; background-color: transparent; color: var(--text-color) !important; padding: 10px 16px; border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: background-color 0.2s ease, opacity 0.2s ease; }
+    .btn-back:hover { background-color: rgba(0,0,0,0.05); }
+    body.night .btn-back:hover { background-color: rgba(255,255,255,0.1); }
     .btn-back svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .mobile-menu-btn { display: none; }
 
     /* LAYOUT */
     .container { max-width: var(--container-width); width: 100%; margin: 0 auto; padding-top: var(--top-spacing); padding-bottom: var(--bottom-spacing); padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; }
@@ -68,79 +62,55 @@
     body.night .icon-moon { display: none !important; }
     body.night .icon-sun { display: block !important; fill: #fff; stroke: #fff; }
 
-    /* --- CASE STUDY STYLES --- */
+    /* CASE STUDY STYLES */
+    .case-tag { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block; }
+
+    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 60px 0; }
     
-    .case-tag {
-        font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
-        font-weight: 700; color: var(--secondary-text); margin-bottom: 16px; display: block;
-    }
+    .hero-image { width: 100%; height: auto; background-color: var(--image-bg); border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--divider-color); overflow: hidden; position: relative; }
+    .hero-image img { width: 100%; height: auto; display: block; }
 
-    h1 { font-size: 32px; font-weight: 700; line-height: 1.2; margin: 0 0 16px 0; }
-    .intro { font-size: 18px; color: var(--secondary-text); margin-bottom: 32px; max-width: 540px; }
+    .hero-badge { position: absolute; top: 16px; right: 16px; background-color: var(--btn-bg); color: var(--btn-text); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    body.night .hero-badge { background-color: #54D1FF; color: #000; }
 
-    .project-links { display: flex; gap: 24px; margin-bottom: 60px; }
-    .external-link {
-        display: inline-flex; align-items: center; gap: 6px;
-        font-size: 14px; font-weight: 600; text-decoration: none;
-        color: var(--text-color); border-bottom: 1px solid transparent; transition: opacity 0.2s;
-    }
-    .external-link:hover { opacity: 0.7; }
-    .external-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+    .text-slide { background-color: var(--slide-bg); color: var(--slide-text); padding: 60px 40px; border-radius: 12px; font-size: 24px; font-weight: 500; text-align: center; line-height: 1.4; margin: 0 0 80px 0; transition: background-color 0.3s, color 0.3s; }
+    .text-slide.secondary { font-size: 32px; font-weight: 700; margin-top: 60px; margin-bottom: 60px; }
 
-    /* Hero Image */
-    .hero-image {
-        width: 100%; height: 320px;
-        background-color: var(--image-bg);
-        border-radius: 12px;
-        margin-bottom: 60px;
-        border: 1px solid var(--divider-color);
-        /* Pattern matching cards */
-        background-image: radial-gradient(var(--secondary-text) 1px, transparent 1px);
-        background-size: 20px 20px;
-        opacity: 0.8;
-    }
+    .project-details-wrapper { margin-bottom: 80px; }
+    .detail-block { margin-bottom: 40px; }
+    .detail-block.last-top { padding-bottom: 40px; border-bottom: 1px solid var(--divider-color); margin-bottom: 40px; }
 
-    /* Meta Grid */
-    .meta-grid {
-        display: grid; grid-template-columns: 1fr 1fr 1fr;
-        gap: 24px; margin-bottom: 80px;
-        padding-bottom: 40px; border-bottom: 1px solid var(--divider-color);
-    }
-    .meta-item h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-label); margin: 0 0 8px 0; font-weight: 600; }
-    .meta-item p { font-size: 15px; margin: 0; font-weight: 500; }
-    .meta-item p span { display: block; color: var(--secondary-text); font-size: 14px; font-weight: 400; margin-top: 2px; }
-
-    /* Content */
-    .case-section { margin-bottom: 80px; }
-    .case-section h2 { font-size: 20px; font-weight: 700; margin: 0 0 16px 0; }
-    .case-section p { font-size: 16px; color: var(--secondary-text); margin-bottom: 24px; max-width: 580px; }
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--meta-label); margin: 0 0 16px 0; font-weight: 600; }
     
-    .media-block {
-        width: 100%;
-        background-color: var(--image-bg);
-        border-radius: 8px;
-        overflow: hidden;
-        margin: 40px 0;
-        border: 1px solid var(--divider-color);
-        display: flex; align-items: center; justify-content: center;
-        min-height: 200px;
-    }
+    .text-highlight { font-size: 20px; color: var(--text-color); font-weight: 700; line-height: 1.5; margin: 0; max-width: 680px; }
+
+    .detail-list { list-style: none; padding: 0; margin: 0; }
+    .detail-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 18px; line-height: 1.6; }
+    .detail-list li::before { content: "•"; position: absolute; left: 0; color: var(--secondary-text); font-weight: bold; }
+    
+    .numbered-list { list-style: none; padding: 0; margin: 0; counter-reset: result-counter; }
+    .numbered-list li { font-size: 16px; color: var(--secondary-text); margin-bottom: 12px; position: relative; padding-left: 20px; line-height: 1.6; }
+    .numbered-list li::before { counter-increment: result-counter; content: counter(result-counter) "."; position: absolute; left: 0; color: var(--secondary-text); font-weight: 500; }
+
+    .process-header { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--secondary-text); font-weight: 600; margin-top: 80px; margin-bottom: 40px; border-top: 1px solid var(--divider-color); padding-top: 60px; }
+    
+    .process-step { margin-bottom: 60px; }
+    .process-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-color); }
+
+    .media-block { width: 100%; background-color: var(--image-bg); border-radius: 8px; overflow: hidden; margin: 24px 0; border: 1px solid var(--divider-color); display: flex; align-items: center; justify-content: center; min-height: 240px; }
     .media-block img { width: 100%; height: auto; display: block; }
+    .img-placeholder { color: var(--secondary-text); font-size: 14px; text-align: center; padding: 20px; }
     
-    /* Testimonial */
-    .testimonial {
-        padding: 32px;
-        background-color: var(--bg-color); 
-        border-left: 2px solid var(--text-color);
-        margin: 40px 0;
-    }
-    .testimonial p { font-size: 18px; font-style: italic; color: var(--text-color); margin-bottom: 16px; }
-    .author { display: flex; align-items: center; gap: 12px; }
-    .author-img { width: 32px; height: 32px; border-radius: 50%; background: #ccc; }
-    .author-info strong { display: block; font-size: 14px; line-height: 1.2; }
-    .author-info span { display: block; font-size: 12px; color: var(--secondary-text); }
+    .nda-note { font-size: 14px; color: var(--secondary-text); font-style: italic; margin-top: 24px; border-left: 2px solid var(--divider-color); padding-left: 16px; }
 
-    /* Animations */
+    .footer-cta { margin-top: 100px; text-align: center; padding-bottom: 20px; }
+    .footer-title { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--text-color); margin: 0 0 16px 0; }
+    .footer-subtitle { font-size: 16px; color: var(--secondary-text); max-width: 620px; margin: 0 auto 32px auto; line-height: 1.6; }
+
+    .btn-contact { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 24px; background-color: var(--btn-bg); color: var(--btn-text); border-radius: 100px; font-weight: 500; font-size: 15px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease; }
+    .btn-contact:hover { transform: translateY(-2px); opacity: 0.9; }
+
     .animated { animation-duration: 0.8s; animation-fill-mode: both; }
     .fadeIn { animation-name: fadeIn; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -148,13 +118,12 @@
     @media (max-width: 768px) {
       .content-grid { grid-template-columns: 1fr; }
       .icon-col { margin-bottom: 20px; }
-      
-      /* Mobile Nav Adjustments */
-      .nav-links { display: flex; } /* Always show Back button */
-      .mobile-menu-btn { display: none; } /* Never show Menu */
-      
-      .meta-grid { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links { display: flex; } 
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
       h1 { font-size: 28px; }
+      .footer-title { font-size: 28px; }
+      .text-slide, .text-slide.secondary { font-size: 24px; padding: 40px 24px; }
+      .media-block { min-height: auto; }
     }
   </style>
 </head>
@@ -162,11 +131,10 @@
 
 <div class="container">
   <header class="main-header">
-    <a href="/" class="logo-circle"><img src="images/profile-avatar.png" alt="Eugene Evgen"></a>
+    <a href="/" class="logo-circle"><img src="/images/profile-avatar.png" alt="Eugene Evgen"></a>
     
-    <!-- "Back to works" (Secondary Style) - Visible on all devices -->
     <div class="nav-links">
-        <a href="works.html" class="btn-back">
+        <a href="/works/" class="btn-back">
             <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Back to works
         </a>
@@ -183,72 +151,104 @@
     
     <div class="content-col">
 
-       <span class="case-tag">AI INTERACTION DESIGN</span>
-       <h1>Empowering Businesses to Scale with AI Chatbots</h1>
-       <p class="intro">Designing a node-based visual editor for sales automation at Hatch, enabling businesses to automate complex workflows without code.</p>
-
-       <div class="project-links">
-           <a href="#" class="external-link">
-               View Figma
-               <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-           </a>
-           <a href="#" class="external-link">
-               View Prototype
-               <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-           </a>
-       </div>
-
+       <span class="case-tag">AI UX RESEARCH / MARKET VALIDATION</span>
+       <h1>Validating U.S. real estate agent demand before committing to an AI MVP development</h1>
+       
        <div class="hero-image">
-           <!-- Placeholder for Hero Image -->
+           <div class="hero-badge">Prevented 3-month AI MVP build</div>
+           <img src="/images/polyagent-01.png" alt="Polyagent AI Research Overview">
        </div>
 
-       <div class="meta-grid">
-           <div class="meta-item">
-               <h4>My Role</h4>
-               <p>Senior Product Designer</p>
+       <h4 class="section-label">CHALLENGE</h4>
+       <div class="text-slide">
+           Polyagent AI risked investing in an AI MVP for real estate agents before validating whether automation solved a real and widespread problem.
+       </div>
+
+       <div class="project-details-wrapper">
+           
+           <div class="detail-block">
+               <h4 class="section-label">MY TASK</h4>
+               <p class="text-highlight">
+                   Led market validation research by recruiting U.S. realtors, conducting interviews, and synthesizing insights to guide the founder’s MVP and investment decisions.
+               </p>
            </div>
-           <div class="meta-item">
-               <h4>Timeline</h4>
-               <p>4 Months</p>
+
+           <div class="detail-block last-top">
+               <h4 class="section-label">TASK TIMEFRAME</h4>
+               <p class="text-highlight">6 weeks</p>
            </div>
-           <div class="meta-item">
-               <h4>Team</h4>
-               <p>Chris Bache <span>CEO</span></p>
-               <p>Will Mapes <span>VP Engineering</span></p>
-           </div>
-       </div>
 
-       <div class="case-section">
-           <h2>The Challenge</h2>
-           <p>
-               Hatch needed to evolve from a manual messaging platform to an automated powerhouse. Users were often confused by the existing linear automation tools, which led to high abandonment rates. The goal was to create a visual, intuitive builder that allowed non-technical users to create complex conversational flows.
-           </p>
-       </div>
-
-       <div class="media-block" style="height: 400px; background-color: var(--code-bg);">
-            <!-- Placeholder for UI Interface/Mockup -->
-            <div style="text-align: center; color: var(--secondary-text); font-size: 14px;">[UI Mockup: Node Editor Interface]</div>
-       </div>
-
-       <div class="case-section">
-           <h2>The Solution</h2>
-           <p>
-               I introduced a node-based canvas interaction pattern. This allowed users to visualize the conversation flow spatially. We focused on "progressive disclosure," keeping the nodes simple at a glance but powerful when inspected.
-           </p>
-           <p>
-               Key features included drag-and-drop logic, real-time error checking, and a "Test Bot" simulator that lived right inside the editor, reducing the feedback loop from minutes to seconds.
-           </p>
-       </div>
-
-       <div class="testimonial">
-           <p>"Eugene is different really for two reasons, the first is his understanding of design patterns and how people use software... the second is just startup speed, my man knows how to work fast..."</p>
-           <div class="author">
-               <div class="author-img"></div> 
-               <div class="author-info">
-                   <strong>Chris Bache</strong>
-                   <span>CEO & Cofounder, Hatch</span>
+           <div class="split-grid">
+               <div>
+                   <h4 class="section-label">KEY FOCUS AREAS</h4>
+                   <ul class="detail-list">
+                       <li>User research & assumption testing</li>
+                       <li>Recruitment strategy & research ops</li>
+                       <li>Interview design & facilitation</li>
+                       <li>Affinity mapping & synthesis</li>
+                       <li>Founder decision support</li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="section-label">ALL RESULTS</h4>
+                   <ul class="numbered-list">
+                       <li>Validated that only ~30% of interviewed realtors experienced sufficient pain to justify AI automation</li>
+                       <li>Identified that the core problem was situational and dependent on agent volume and business maturity</li>
+                       <li>Enabled the founder to pause a 3-month AI MVP development before committing engineering resources</li>
+                       <li>Prevented building an over-scoped product misaligned with the true addressable market</li>
+                   </ul>
                </div>
            </div>
+
+       </div>
+
+       <h4 class="section-label">CORE RESULT</h4>
+       <div class="text-slide secondary" style="margin-top: 16px;">
+           Validated market fit early and avoided a 3-month AI MVP after discovering limited demand for automation among real estate agents.
+       </div>
+
+       <div class="media-block">
+            <img src="/images/polyagent-02.png" alt="Research Findings Summary">
+       </div>
+       
+       <h4 class="process-header">OVERVIEW OF MY RESEARCH PROCESS</h4>
+
+       <div class="process-step">
+           <h3>Step 1 — Research framing & assumptions:</h3>
+           <p>Defined 3 testable assumptions and translated them into a focused interview script centered on real agent workflows and decision triggers.</p>
+           <div class="media-block">
+               <img src="/images/polyagent-03.png" alt="Research Framing">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 2 — Recruiting U.S. realtors:</h3>
+           <p>Built a multi-channel recruitment strategy that secured qualified real estate agents across 6 U.S. states within a limited research budget.</p>
+           <div class="media-block">
+               <img src="/images/polyagent-04.png" alt="Recruitment Strategy">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 3 — Interviews:</h3>
+           <p>Conducted 10 in-depth interviews with U.S. realtors to uncover lead-handling behaviors, automation pain points, and willingness to pay.</p>
+           <div class="media-block">
+               <img src="/images/polyagent-05.png" alt="Interview Process">
+           </div>
+       </div>
+
+       <div class="process-step">
+           <h3>Step 4 — Data synthesis & analysis:</h3>
+           <p>Synthesized interview data through affinity mapping and customer profiling to clearly validate or invalidate each core assumption.</p>
+           <div class="media-block">
+               <img src="/images/polyagent-06.png" alt="Data Synthesis">
+           </div>
+       </div>
+
+       <div class="footer-cta">
+           <h2 class="footer-title">Want to turn complex ideas into products people love?</h2>
+           <p class="footer-subtitle">I help startups and enterprises design, validate, and scale SaaS products — from UX research to full product delivery.<br>AI-powered workflows, fast iterations, real business impact.</p>
+           <a href="/contact/" class="btn-contact">Let’s design your product</a>
        </div>
 
     </div>
@@ -256,7 +256,6 @@
 </div>
 
 <script>
-  // Shared Script
   const themeBtn = document.getElementById('theme-btn');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
