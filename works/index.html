@@ -68,7 +68,10 @@
     .card-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
     .work-card:hover .card-img { transform: scale(1.03); }
 
-    .card-badge { position: absolute; top: 12px; right: 12px; background-color: var(--btn-bg); color: var(--btn-text); font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    /* MODIFIED: Changed default (light mode) background to Yellow and text to Black */
+    .card-badge { position: absolute; top: 12px; right: 12px; background-color: #FFD500; color: #000; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 100px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10; letter-spacing: 0.02em; transition: background-color 0.3s, color 0.3s; }
+    
+    /* Night mode stays Cyan */
     body.night .card-badge { background-color: #54D1FF; color: #000; }
 
     .ui-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: transform 0.4s ease; }
@@ -189,7 +192,6 @@
                </div>
            </a>
 
-           <!-- Replaced Real Estate Forecasting with Polyagent AI Research -->
            <a href="/ai-ux-research-polyagent/" class="work-card">
                 <div class="card-visual">
                     <div class="card-badge">Prevented 3-month AI MVP build</div>
