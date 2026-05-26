@@ -119,8 +119,28 @@
         box-shadow: none;
         justify-content: flex-start;
     }
+    
+    /* Hide the right side when scrolled */
     .header-wrapper.scrolled .header-right {
         display: none;
+    }
+
+    /* Floating capsule for Desktop Nav Links */
+    .header-wrapper.scrolled .nav-links {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 20px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        gap: 20px;
+    }
+    body.night .header-wrapper.scrolled .nav-links {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .header-wrapper.scrolled .nav-links:hover {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
 
     /* Floating capsule for Mobile Menu Button when scrolled */
@@ -131,7 +151,7 @@
         border: 1px solid var(--header-border);
         border-radius: 100px;
         padding: 8px 20px;
-        margin-left: 0;
+        margin-left: 0; 
         box-shadow: 0 4px 16px rgba(0,0,0,0.06);
         transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
     }
@@ -146,20 +166,6 @@
         display: flex; align-items: center; gap: 24px;
         transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
     }
-    .header-wrapper.scrolled .nav-links {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--header-border);
-        border-radius: 100px;
-        padding: 8px 20px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        gap: 20px;
-    }
-    body.night .header-wrapper.scrolled .nav-links {
-        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    }
-
     .nav-links a.text-link {
         font-family: var(--font-body);
         font-weight: 500;
@@ -225,17 +231,31 @@
     .two { animation-delay: 0.5s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* FAB */
+    .fab-up { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 50%; background-color: var(--btn-bg); color: var(--btn-text); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; opacity: 0; pointer-events: none; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .fab-up.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .fab-up:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.15); }
+    .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    body.night .fab-up { box-shadow: 0 8px 24px rgba(255,255,255,0.05); }
+
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .btn-cv { display: none; }
       .card-visual { height: 200px; }
       .card-content h2, .card-content p { word-wrap: break-word; }
+      
       .header-container { padding-top: 16px; }
       .header-wrapper.scrolled .header-container { padding-top: 8px; padding-bottom: 8px; }
+      
+      /* Keeps the alignment padding when scrolled so the capsule doesn't stick to the edge */
       .main-header,
       .header-wrapper.scrolled .main-header { height: 60px; min-height: 60px; padding: 0 24px; align-items: center; }
+      
       .img-left-mobile { object-position: left center !important; }
+
+      .fab-up { bottom: 24px; right: 24px; width: 40px; height: 40px; }
+      .fab-up svg { width: 20px; height: 20px; }
     }
   </style>
 </head>
@@ -366,6 +386,11 @@
   </div>
 </div>
 
+<!-- FAB BUTTON -->
+<div id="fab-up" class="fab-up">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</div>
+
 <script>
   // Theme
   const themeBtn = document.getElementById('theme-btn');
@@ -398,14 +423,28 @@
       }
   });
 
-  // Sticky Header
+  // Sticky Header & FAB
   const headerWrapper = document.getElementById('header-wrapper');
+  const fabUp = document.getElementById('fab-up');
+  
   window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
           headerWrapper.classList.add('scrolled');
       } else {
           headerWrapper.classList.remove('scrolled');
       }
+      
+      // Toggle FAB visibility
+      if (window.scrollY > 400) {
+          fabUp.classList.add('visible');
+      } else {
+          fabUp.classList.remove('visible');
+      }
+  });
+
+  // Scroll to top on FAB click
+  fabUp.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
 </body>
