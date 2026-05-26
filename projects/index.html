@@ -80,6 +80,13 @@
         top: 0;
         z-index: 1001;
         width: 100%;
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .header-wrapper.scrolled {
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
     }
     .header-container {
         max-width: var(--container-width);
@@ -114,6 +121,25 @@
     }
     .header-wrapper.scrolled .header-right {
         display: none;
+    }
+
+    /* Floating capsule for Mobile Menu Button when scrolled */
+    .header-wrapper.scrolled .mobile-menu-btn {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 20px;
+        margin-left: 0;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    }
+    body.night .header-wrapper.scrolled .mobile-menu-btn {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .header-wrapper.scrolled .mobile-menu-btn:hover {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
 
     .nav-links { 
@@ -199,27 +225,6 @@
     .two { animation-delay: 0.5s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Floating capsule for Mobile Menu Button when scrolled */
-    .header-wrapper.scrolled .mobile-menu-btn {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--header-border);
-        border-radius: 100px;
-        padding: 8px 20px;
-        margin-left: 0;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    body.night .header-wrapper.scrolled .mobile-menu-btn {
-        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    }
-
-    .header-wrapper.scrolled .mobile-menu-btn:hover {
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
-
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
@@ -228,16 +233,8 @@
       .card-content h2, .card-content p { word-wrap: break-word; }
       .header-container { padding-top: 16px; }
       .header-wrapper.scrolled .header-container { padding-top: 8px; padding-bottom: 8px; }
-      /* Set the default mobile header (unscrolled) */
-      .main-header {
-        height: 60px;
-        min-height: 60px;
-        padding: 0 24px;
-        align-items: center;
-        width: 100%;
-        justify-content: space-between;
-      }
-      .header-left, .header-right { height: 100%; display: flex; align-items: center; }
+      .main-header,
+      .header-wrapper.scrolled .main-header { height: 60px; min-height: 60px; padding: 0 24px; align-items: center; }
       .img-left-mobile { object-position: left center !important; }
     }
   </style>
