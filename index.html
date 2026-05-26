@@ -149,6 +149,27 @@
         display: none;
     }
 
+    /* Floating capsule for Mobile Menu Button when scrolled */
+    .header-wrapper.scrolled .mobile-menu-btn {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 20px;
+        margin-left: 0; /* Resets the default 8px margin so it perfectly aligns to the left */
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    body.night .header-wrapper.scrolled .mobile-menu-btn {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .header-wrapper.scrolled .mobile-menu-btn:hover {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
     /* Nav links become their own floating capsule when scrolled */
     .header-wrapper.scrolled .nav-links {
         background-color: var(--header-bg);
