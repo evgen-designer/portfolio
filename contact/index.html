@@ -23,7 +23,9 @@
       --header-border: rgba(0, 0, 0, 0.05);
       --btn-bg: #111; 
       --btn-text: #fff;
-      --input-bg: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: rgba(0,0,0,0.08);
+      --input-bg: #F6F6F6;
       --input-border: #e5e5e5;
       --input-placeholder: #999;
       --input-focus: #111;
@@ -44,6 +46,8 @@
       --header-border: rgba(255, 255, 255, 0.1); 
       --btn-bg: #fff; 
       --btn-text: #000;
+      --card-bg: #1A1A1A;
+      --card-border: rgba(255,255,255,0.1);
       --input-bg: #262626;
       --input-border: #333333;
       --input-placeholder: #666;
@@ -79,6 +83,13 @@
         top: 0;
         z-index: 1001;
         width: 100%;
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        transition: background-color 0.3s ease, border-bottom 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .header-wrapper.scrolled {
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
     }
     .header-container {
         max-width: var(--container-width);
@@ -115,10 +126,7 @@
         display: none;
     }
 
-    .nav-links { 
-        display: flex; align-items: center; gap: 24px;
-        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
-    }
+    /* Floating capsule for Desktop Nav Links */
     .header-wrapper.scrolled .nav-links {
         background-color: var(--header-bg);
         backdrop-filter: blur(12px);
@@ -132,7 +140,33 @@
     body.night .header-wrapper.scrolled .nav-links {
         box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     }
+    .header-wrapper.scrolled .nav-links:hover {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
 
+    /* Floating capsule for Mobile Menu Button when scrolled */
+    .header-wrapper.scrolled .mobile-menu-btn {
+        background-color: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--header-border);
+        border-radius: 100px;
+        padding: 8px 20px;
+        margin-left: 0;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    }
+    body.night .header-wrapper.scrolled .mobile-menu-btn {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .header-wrapper.scrolled .mobile-menu-btn:hover {
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-links { 
+        display: flex; align-items: center; gap: 24px;
+        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    }
     .nav-links a.text-link {
         font-family: var(--font-body);
         font-weight: 500;
@@ -172,8 +206,15 @@
     .mobile-link.nav-active { opacity: 1; pointer-events: none; }
     .mobile-btn-cv { font-size: 18px; padding: 14px 28px; }
 
-    /* CONTACT FORM */
-    h1 {
+    /* CONTACT CARD */
+    .contact-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        padding: 80px;
+    }
+
+    .contact-card h1 {
         font-family: var(--font-body);
         font-size: 24px;
         font-weight: 500;
@@ -182,8 +223,21 @@
         margin-top: 0;
         text-align: center;
     }
+
     form { display: flex; flex-direction: column; gap: 16px; max-width: 100%; }
-    input, select, textarea { width: 100%; background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-color); padding: 12px 14px; border-radius: 10px; font-family: var(--font-body); font-size: 15px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; }
+    input, select, textarea {
+        width: 100%;
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-color);
+        padding: 12px 14px;
+        border-radius: 10px;
+        font-family: var(--font-body);
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        -webkit-appearance: none;
+    }
     input::placeholder, textarea::placeholder { color: var(--input-placeholder); }
     input:focus, select:focus, textarea:focus { border-color: var(--input-focus); box-shadow: 0 0 0 1px var(--input-focus); }
     textarea { min-height: 120px; resize: vertical; }
@@ -204,42 +258,15 @@
     .fab-up svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     body.night .fab-up { box-shadow: 0 8px 24px rgba(255,255,255,0.05); }
 
-    /* Floating capsule for Mobile Menu Button when scrolled */
-    .header-wrapper.scrolled .mobile-menu-btn {
-        background-color: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--header-border);
-        border-radius: 100px;
-        padding: 8px 20px;
-        margin-left: 0;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        transition: background-color 0.3s ease, border 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    body.night .header-wrapper.scrolled .mobile-menu-btn {
-        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    }
-
-    .header-wrapper.scrolled .mobile-menu-btn:hover {
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
-
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .btn-cv { display: none; }
       .header-container { padding-top: 16px; }
       .header-wrapper.scrolled .header-container { padding-top: 8px; padding-bottom: 8px; }
-      .main-header {
-        height: 60px;
-        min-height: 60px;
-        padding: 0 24px;
-        align-items: center;
-        width: 100%;
-        justify-content: space-between;
-      }
-      .header-left, .header-right { height: 100%; display: flex; align-items: center; }
+      .main-header,
+      .header-wrapper.scrolled .main-header { height: 60px; min-height: 60px; padding: 0 24px; align-items: center; }
+      .contact-card { padding: 40px 24px; }
       .fab-up { bottom: 24px; right: 24px; width: 40px; height: 40px; }
       .fab-up svg { width: 20px; height: 20px; }
     }
@@ -279,32 +306,36 @@
 <div class="container">
   <div class="content-grid">
     <div class="content-col">
-       
-       <h1>Ready to level up your product UX?</h1>
-       
-       <form action="https://formspree.io/f/xvzpopyl" method="POST">
-           <input type="text" name="name" placeholder="Your name*" required>
-           <input type="email" name="email" placeholder="your@email.com*" required>
-           
-           <div class="select-wrapper">
-               <select name="subject" required>
-                   <option value="" disabled selected>What's your current focus?</option>
-                   <option value="Audit">UX audit & conversion optimization</option>
-                   <option value="AI">Integrating AI into a product or workflow</option>
-                   <option value="Redesign">Redesigning a complex/legacy SaaS</option>
-                   <option value="Scale">Scaling an existing SaaS</option>
-                   <option value="MVP">Building a new product / MVP</option>
-                   <option value="Research">UX research & user testing</option>
-                   <option value="Other">Other / not sure yet</option>
-               </select>
-           </div>
-           
-           <textarea name="message" placeholder="Tell me a bit about your platform. What are your main goals, or what specific bottlenecks are you trying to fix right now?" required></textarea>
-           
-           <button type="submit">Discuss your project</button>
-           
-           <p class="form-note">No pressure — just a quick chat to see if my UX approach is a good fit for your business goals.</p>
-       </form>
+
+      <div class="contact-card">
+
+        <h1>Ready to level up your product UX?</h1>
+
+        <form action="https://formspree.io/f/xvzpopyl" method="POST">
+            <input type="text" name="name" placeholder="Your name*" required>
+            <input type="email" name="email" placeholder="your@email.com*" required>
+            
+            <div class="select-wrapper">
+                <select name="subject" required>
+                    <option value="" disabled selected>What's your current focus?</option>
+                    <option value="Audit">UX audit & conversion optimization</option>
+                    <option value="AI">Integrating AI into a product or workflow</option>
+                    <option value="Redesign">Redesigning a complex/legacy SaaS</option>
+                    <option value="Scale">Scaling an existing SaaS</option>
+                    <option value="MVP">Building a new product / MVP</option>
+                    <option value="Research">UX research & user testing</option>
+                    <option value="Other">Other / not sure yet</option>
+                </select>
+            </div>
+            
+            <textarea name="message" placeholder="Tell me a bit about your platform. What are your main goals, or what specific bottlenecks are you trying to fix right now?" required></textarea>
+            
+            <button type="submit">Discuss your project</button>
+            
+            <p class="form-note">No pressure — just a quick chat to see if my UX approach is a good fit for your business goals.</p>
+        </form>
+
+      </div>
 
     </div>
   </div>
